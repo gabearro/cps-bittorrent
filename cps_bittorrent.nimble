@@ -6,8 +6,8 @@ srcDir = "src"
 skipDirs = @["tests", "examples", "benchmarks", ".github", "scripts"]
 
 requires "nim >= 2.0.0"
-requires "https://github.com/gabearro/cps-runtime@#v1.0.0"
-requires "https://github.com/gabearro/cps-tls@#v1.0.0"
+requires "https://github.com/gabearro/cps-runtime#v1.0.0"
+requires "https://github.com/gabearro/cps-tls#v1.0.0"
 
 task test, "Run the project test suite":
   exec "nim c -r tests/bittorrent/test_bencode.nim"
