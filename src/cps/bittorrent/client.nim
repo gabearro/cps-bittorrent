@@ -4,19 +4,19 @@
 ## and disk I/O. This is the top-level API for the BitTorrent client.
 
 import std/[tables, sets, times, os, algorithm, nativesockets, strutils, math, atomics, deques]
-import ../private/spinlock
-import ../runtime
-import ../transform
-import ../eventloop
-import ../mt/mtruntime
-import ../io/streams
-import ../io/tcp
-import ../io/udp
-import ../io/dns
-import ../io/timeouts
-import ../io/nat
-import ../concurrency/channels
-import ../concurrency/sync
+import cps/private/spinlock
+import cps/runtime
+import cps/transform
+import cps/eventloop
+import cps/mt/mtruntime
+import cps/io/streams
+import cps/io/tcp
+import cps/io/udp
+import cps/io/dns
+import cps/io/timeouts
+import cps/io/nat
+import cps/concurrency/channels
+import cps/concurrency/sync
 import bencode
 import metainfo
 import tracker

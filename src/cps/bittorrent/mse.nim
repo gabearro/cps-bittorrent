@@ -6,9 +6,9 @@
 ## Protocol: DH exchange → derive RC4 keys → negotiate crypto mode →
 ## wrap stream with RC4 (or continue plaintext after handshake).
 
-import ../runtime
-import ../transform
-import ../io/streams
+import cps/runtime
+import cps/transform
+import cps/io/streams
 import sha1
 import utils
 

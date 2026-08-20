@@ -3,16 +3,16 @@
 ## Announces to trackers and returns peer lists.
 
 import std/[strutils, sets, uri, net, nativesockets]
-import ../runtime
-import ../transform
-import ../eventloop
-import ../io/streams
-import ../io/tcp
-import ../io/udp
-import ../io/buffered
-import ../io/dns
-import ../io/timeouts
-import ../tls/client as tls
+import cps/runtime
+import cps/transform
+import cps/eventloop
+import cps/io/streams
+import cps/io/tcp
+import cps/io/udp
+import cps/io/buffered
+import cps/io/dns
+import cps/io/timeouts
+import cps/tls/client as tls
 import bencode
 import metainfo
 import utils

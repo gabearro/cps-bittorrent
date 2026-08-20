@@ -4,14 +4,14 @@
 ## Each peer runs as an independent CPS task with its own read/write loops.
 
 import std/[times, strutils]
-import ../runtime
-import ../transform
-import ../eventloop
-import ../io/streams
-import ../io/tcp
-import ../io/buffered
-import ../io/timeouts
-import ../concurrency/channels
+import cps/runtime
+import cps/transform
+import cps/eventloop
+import cps/io/streams
+import cps/io/tcp
+import cps/io/buffered
+import cps/io/timeouts
+import cps/concurrency/channels
 import peer_protocol
 import pieces
 import extensions

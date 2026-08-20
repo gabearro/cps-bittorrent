@@ -8,12 +8,12 @@
 ##   openWebSeedConn(url) / fetchRange(conn, ...) / close(conn) — persistent connection
 
 import std/[strutils, uri]
-import ../runtime
-import ../transform
-import ../io/streams
-import ../io/tcp
-import ../io/buffered
-import ../tls/client as tls
+import cps/runtime
+import cps/transform
+import cps/io/streams
+import cps/io/tcp
+import cps/io/buffered
+import cps/tls/client as tls
 import metainfo
 
 type

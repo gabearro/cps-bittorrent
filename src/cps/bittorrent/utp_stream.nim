@@ -5,14 +5,14 @@
 ## UtpManager multiplexes multiple uTP connections over a single UDP port.
 
 import std/[nativesockets, strutils, times, deques, atomics]
-import ../runtime
-import ../transform
-import ../eventloop
-import ../io/streams
-import ../io/udp
-import ../io/timeouts
-import ../private/platform
-import ../private/concurrent_table
+import cps/runtime
+import cps/transform
+import cps/eventloop
+import cps/io/streams
+import cps/io/udp
+import cps/io/timeouts
+import cps/private/platform
+import cps/private/concurrent_table
 import utp
 
 const

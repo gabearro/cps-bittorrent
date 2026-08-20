@@ -4,7 +4,7 @@
 ## hex encoding/decoding helpers.
 
 import std/[bitops, strutils, times]
-import ../private/xorshift
+import cps/private/xorshift
 export xorshift
 
 # Thread-local PRNG — lazy-initialized per thread to avoid

@@ -21,10 +21,10 @@
 ##   await limiter.consume(bytesRead, Download)
 
 import std/[monotimes, times, math]
-import ../runtime
-import ../transform
-import ../eventloop
-import ../private/spinlock
+import cps/runtime
+import cps/transform
+import cps/eventloop
+import cps/private/spinlock
 
 const
   MinBurstBytes* = 16384    ## Minimum burst size (16 KiB) — prevents micro-sleeps
