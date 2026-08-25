@@ -1,0 +1,16 @@
+nimTitle	extensions	cps/bittorrent/extensions.html	module cps/bittorrent/extensions		0
+nim	ExtHandshakeId	cps/bittorrent/extensions.html#ExtHandshakeId	const ExtHandshakeId		11
+nim	ExtUploadOnly	cps/bittorrent/extensions.html#ExtUploadOnly	const ExtUploadOnly		15
+nim	ExtLtDontHave	cps/bittorrent/extensions.html#ExtLtDontHave	const ExtLtDontHave		16
+nim	ExtensionId	cps/bittorrent/extensions.html#ExtensionId	type ExtensionId		19
+nim	ExtensionRegistry	cps/bittorrent/extensions.html#ExtensionRegistry	object ExtensionRegistry		21
+nim	newExtensionRegistry	cps/bittorrent/extensions.html#newExtensionRegistry	proc newExtensionRegistry(): ExtensionRegistry		35
+nim	registerExtension	cps/bittorrent/extensions.html#registerExtension,ExtensionRegistry,string	proc registerExtension(reg: var ExtensionRegistry; name: string): ExtensionId		44
+nim	localId	cps/bittorrent/extensions.html#localId,ExtensionRegistry,string	proc localId(reg: ExtensionRegistry; name: string): ExtensionId		57
+nim	remoteId	cps/bittorrent/extensions.html#remoteId,ExtensionRegistry,string	proc remoteId(reg: ExtensionRegistry; name: string): ExtensionId		61
+nim	supportsExtension	cps/bittorrent/extensions.html#supportsExtension,ExtensionRegistry,string	proc supportsExtension(reg: ExtensionRegistry; name: string): bool		65
+nim	lookupLocalName	cps/bittorrent/extensions.html#lookupLocalName,ExtensionRegistry,ExtensionId	proc lookupLocalName(reg: ExtensionRegistry; id: ExtensionId): string		70
+nim	lookupRemoteName	cps/bittorrent/extensions.html#lookupRemoteName,ExtensionRegistry,ExtensionId	proc lookupRemoteName(reg: ExtensionRegistry; id: ExtensionId): string		74
+nim	localExtensions	cps/bittorrent/extensions.html#localExtensions.i,ExtensionRegistry	iterator localExtensions(reg: ExtensionRegistry): tuple[name: string, id: ExtensionId]		78
+nim	encodeExtHandshake	cps/bittorrent/extensions.html#encodeExtHandshake,ExtensionRegistry,int,uint16,int,string,bool	proc encodeExtHandshake(reg: ExtensionRegistry; metadataSize: int = 0;\n                   listenPort: uint16 = 0; reqq: int = 250;\n                   clientName: string = ""; uploadOnly: bool = false): string		83
+nim	decodeExtHandshake	cps/bittorrent/extensions.html#decodeExtHandshake,ExtensionRegistry,string	proc decodeExtHandshake(reg: var ExtensionRegistry; payload: string)		112

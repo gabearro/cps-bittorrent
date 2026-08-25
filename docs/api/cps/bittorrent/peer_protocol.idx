@@ -1,0 +1,50 @@
+nimTitle	peer_protocol	cps/bittorrent/peer_protocol.html	module cps/bittorrent/peer_protocol		0
+nim	ProtocolString	cps/bittorrent/peer_protocol.html#ProtocolString	const ProtocolString		8
+nim	HandshakeLength	cps/bittorrent/peer_protocol.html#HandshakeLength	const HandshakeLength		9
+nim	msgChoke	cps/bittorrent/peer_protocol.html#msgChoke	MessageId.msgChoke		12
+nim	msgUnchoke	cps/bittorrent/peer_protocol.html#msgUnchoke	MessageId.msgUnchoke		12
+nim	msgInterested	cps/bittorrent/peer_protocol.html#msgInterested	MessageId.msgInterested		12
+nim	msgNotInterested	cps/bittorrent/peer_protocol.html#msgNotInterested	MessageId.msgNotInterested		12
+nim	msgHave	cps/bittorrent/peer_protocol.html#msgHave	MessageId.msgHave		12
+nim	msgBitfield	cps/bittorrent/peer_protocol.html#msgBitfield	MessageId.msgBitfield		12
+nim	msgRequest	cps/bittorrent/peer_protocol.html#msgRequest	MessageId.msgRequest		12
+nim	msgPiece	cps/bittorrent/peer_protocol.html#msgPiece	MessageId.msgPiece		12
+nim	msgCancel	cps/bittorrent/peer_protocol.html#msgCancel	MessageId.msgCancel		12
+nim	msgPort	cps/bittorrent/peer_protocol.html#msgPort	MessageId.msgPort		12
+nim	msgSuggestPiece	cps/bittorrent/peer_protocol.html#msgSuggestPiece	MessageId.msgSuggestPiece		12
+nim	msgHaveAll	cps/bittorrent/peer_protocol.html#msgHaveAll	MessageId.msgHaveAll		12
+nim	msgHaveNone	cps/bittorrent/peer_protocol.html#msgHaveNone	MessageId.msgHaveNone		12
+nim	msgRejectRequest	cps/bittorrent/peer_protocol.html#msgRejectRequest	MessageId.msgRejectRequest		12
+nim	msgAllowedFast	cps/bittorrent/peer_protocol.html#msgAllowedFast	MessageId.msgAllowedFast		12
+nim	msgExtended	cps/bittorrent/peer_protocol.html#msgExtended	MessageId.msgExtended		12
+nim	MessageId	cps/bittorrent/peer_protocol.html#MessageId	enum MessageId		12
+nim	PeerMessage	cps/bittorrent/peer_protocol.html#PeerMessage	object PeerMessage		30
+nim	Handshake	cps/bittorrent/peer_protocol.html#Handshake	object Handshake		56
+nim	encodeHandshake	cps/bittorrent/peer_protocol.html#encodeHandshake,array[,byte],array[,byte],bool	proc encodeHandshake(infoHash: array[20, byte]; peerId: array[20, byte];\n                supportExtensions: bool = true): string		62
+nim	decodeHandshake	cps/bittorrent/peer_protocol.html#decodeHandshake,string	proc decodeHandshake(data: string): Handshake		78
+nim	supportsExtensions	cps/bittorrent/peer_protocol.html#supportsExtensions,Handshake	proc supportsExtensions(h: Handshake): bool		92
+nim	encodeMessage	cps/bittorrent/peer_protocol.html#encodeMessage,PeerMessage	proc encodeMessage(msg: PeerMessage): string		97
+nim	wireSize	cps/bittorrent/peer_protocol.html#wireSize,PeerMessage	proc wireSize(msg: PeerMessage): int		138
+nim	encodeKeepAlive	cps/bittorrent/peer_protocol.html#encodeKeepAlive	proc encodeKeepAlive(): string		152
+nim	decodeMessage	cps/bittorrent/peer_protocol.html#decodeMessage,string	proc decodeMessage(data: string): PeerMessage		157
+nim	hasPiece	cps/bittorrent/peer_protocol.html#hasPiece,seq[byte],int	proc hasPiece(bitfield: seq[byte]; index: int): bool		235
+nim	setPiece	cps/bittorrent/peer_protocol.html#setPiece,seq[byte],int	proc setPiece(bitfield: var seq[byte]; index: int)		241
+nim	clearPiece	cps/bittorrent/peer_protocol.html#clearPiece,seq[byte],int	proc clearPiece(bitfield: var seq[byte]; index: int)		247
+nim	newBitfield	cps/bittorrent/peer_protocol.html#newBitfield,int	proc newBitfield(numPieces: int): seq[byte]		253
+nim	countPieces	cps/bittorrent/peer_protocol.html#countPieces,seq[byte],int	proc countPieces(bitfield: seq[byte]; total: int): int		257
+nim	chokeMsg	cps/bittorrent/peer_protocol.html#chokeMsg	proc chokeMsg(): PeerMessage		263
+nim	unchokeMsg	cps/bittorrent/peer_protocol.html#unchokeMsg	proc unchokeMsg(): PeerMessage		265
+nim	interestedMsg	cps/bittorrent/peer_protocol.html#interestedMsg	proc interestedMsg(): PeerMessage		267
+nim	notInterestedMsg	cps/bittorrent/peer_protocol.html#notInterestedMsg	proc notInterestedMsg(): PeerMessage		269
+nim	haveMsg	cps/bittorrent/peer_protocol.html#haveMsg,uint32	proc haveMsg(index: uint32): PeerMessage		271
+nim	bitfieldMsg	cps/bittorrent/peer_protocol.html#bitfieldMsg,seq[byte]	proc bitfieldMsg(bf: seq[byte]): PeerMessage		275
+nim	requestMsg	cps/bittorrent/peer_protocol.html#requestMsg,uint32,uint32,uint32	proc requestMsg(index, begin, length: uint32): PeerMessage		279
+nim	cancelMsg	cps/bittorrent/peer_protocol.html#cancelMsg,uint32,uint32,uint32	proc cancelMsg(index, begin, length: uint32): PeerMessage		283
+nim	pieceMsg	cps/bittorrent/peer_protocol.html#pieceMsg,uint32,uint32,string	proc pieceMsg(index, begin: uint32; data: string): PeerMessage		287
+nim	suggestPieceMsg	cps/bittorrent/peer_protocol.html#suggestPieceMsg,uint32	proc suggestPieceMsg(index: uint32): PeerMessage		291
+nim	haveAllMsg	cps/bittorrent/peer_protocol.html#haveAllMsg	proc haveAllMsg(): PeerMessage		296
+nim	haveNoneMsg	cps/bittorrent/peer_protocol.html#haveNoneMsg	proc haveNoneMsg(): PeerMessage		298
+nim	rejectRequestMsg	cps/bittorrent/peer_protocol.html#rejectRequestMsg,uint32,uint32,uint32	proc rejectRequestMsg(index, begin, length: uint32): PeerMessage		300
+nim	allowedFastMsg	cps/bittorrent/peer_protocol.html#allowedFastMsg,uint32	proc allowedFastMsg(index: uint32): PeerMessage		304
+nim	portMsg	cps/bittorrent/peer_protocol.html#portMsg,uint16	proc portMsg(port: uint16): PeerMessage		308
+nim	extendedMsg	cps/bittorrent/peer_protocol.html#extendedMsg,uint8,string	proc extendedMsg(extId: uint8; payload: string): PeerMessage		312

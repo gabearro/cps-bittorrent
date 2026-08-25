@@ -1,0 +1,5 @@
+nimTitle	sha1	cps/bittorrent/sha1.html	module cps/bittorrent/sha1		0
+nim	sha1	cps/bittorrent/sha1.html#sha1,string	proc sha1(data: string): array[20, byte]		9
+nim	sha1	cps/bittorrent/sha1.html#sha1,pointer,int	proc sha1(data: pointer; length: int): array[20, byte]		16
+nim	sha1Hex	cps/bittorrent/sha1.html#sha1Hex,string	proc sha1Hex(data: string): string		20
+nimgrp	sha1	cps/bittorrent/sha1.html#sha1-procs-all	proc		9

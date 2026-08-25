@@ -1,0 +1,19 @@
+nimTitle	pex	cps/bittorrent/pex.html	module cps/bittorrent/pex		0
+nim	UtPexName	cps/bittorrent/pex.html#UtPexName	const UtPexName		10
+nim	MaxPexPeers	cps/bittorrent/pex.html#MaxPexPeers	const MaxPexPeers		11
+nim	PexIntervalMs	cps/bittorrent/pex.html#PexIntervalMs	const PexIntervalMs		12
+nim	PexFlags	cps/bittorrent/pex.html#PexFlags	type PexFlags		15
+nim	`or`	cps/bittorrent/pex.html#or,PexFlags,PexFlags	proc `or`(a, b: PexFlags): PexFlags		18
+nim	`and`	cps/bittorrent/pex.html#and,PexFlags,PexFlags	proc `and`(a, b: PexFlags): PexFlags		20
+nim	`not`	cps/bittorrent/pex.html#not,PexFlags	proc `not`(a: PexFlags): PexFlags		22
+nim	`==`	cps/bittorrent/pex.html#==,PexFlags,PexFlags	proc `==`(a, b: PexFlags): bool		24
+nim	`$`	cps/bittorrent/pex.html#$,PexFlags	proc `$`(f: PexFlags): string		26
+nim	pexEncryption	cps/bittorrent/pex.html#pexEncryption	const pexEncryption		29
+nim	pexSeedOnly	cps/bittorrent/pex.html#pexSeedOnly	const pexSeedOnly		30
+nim	pexUtp	cps/bittorrent/pex.html#pexUtp	const pexUtp		31
+nim	pexHolepunch	cps/bittorrent/pex.html#pexHolepunch	const pexHolepunch		32
+nim	pexOutgoing	cps/bittorrent/pex.html#pexOutgoing	const pexOutgoing		33
+nim	pexNone	cps/bittorrent/pex.html#pexNone	const pexNone		34
+nim	PexMessage	cps/bittorrent/pex.html#PexMessage	object PexMessage		37
+nim	encodePexMessage	cps/bittorrent/pex.html#encodePexMessage,openArray[CompactPeer],openArray[uint8],openArray[CompactPeer],openArray[CompactPeer],openArray[uint8],openArray[CompactPeer]	proc encodePexMessage(added: openArray[CompactPeer]; addedFlags: openArray[uint8];\n                 dropped: openArray[CompactPeer];\n                 added6: openArray[CompactPeer] = [];\n                 added6Flags: openArray[uint8] = [];\n                 dropped6: openArray[CompactPeer] = []): string		55
+nim	decodePexMessage	cps/bittorrent/pex.html#decodePexMessage,string	proc decodePexMessage(payload: string): PexMessage		75

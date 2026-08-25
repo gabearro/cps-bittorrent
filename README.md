@@ -138,8 +138,12 @@ APIs, ownership, protocol state, or execution behavior.
 ```sh
 nimble install -d -y
 nimble checkDocs
+nimble docs
 nimble test
 ```
+
+`nimble docs` writes the generated API reference to
+[`docs/api/theindex.html`](docs/api/theindex.html).
 
 The default suite covers bencode, metainfo, peer messages, extension
 negotiation, and DHT validation without joining the public swarm.

@@ -1,0 +1,14 @@
+nimTitle	metainfo	cps/bittorrent/metainfo.html	module cps/bittorrent/metainfo		0
+nim	FileEntry	cps/bittorrent/metainfo.html#FileEntry	object FileEntry		13
+nim	TorrentInfo	cps/bittorrent/metainfo.html#TorrentInfo	object TorrentInfo		17
+nim	TorrentMetainfo	cps/bittorrent/metainfo.html#TorrentMetainfo	object TorrentMetainfo		26
+nim	MetainfoError	cps/bittorrent/metainfo.html#MetainfoError	object MetainfoError		37
+nim	pieceCount	cps/bittorrent/metainfo.html#pieceCount,TorrentInfo	proc pieceCount(info: TorrentInfo): int		39
+nim	pieceHash	cps/bittorrent/metainfo.html#pieceHash,TorrentInfo,int	proc pieceHash(info: TorrentInfo; index: int): array[20, byte]		43
+nim	lastPieceLength	cps/bittorrent/metainfo.html#lastPieceLength,TorrentInfo	proc lastPieceLength(info: TorrentInfo): int		50
+nim	pieceSize	cps/bittorrent/metainfo.html#pieceSize,TorrentInfo,int	proc pieceSize(info: TorrentInfo; index: int): int		56
+nim	infoHashHex	cps/bittorrent/metainfo.html#infoHashHex,TorrentInfo	proc infoHashHex(info: TorrentInfo): string		63
+nim	infoHashUrlEncoded	cps/bittorrent/metainfo.html#infoHashUrlEncoded,TorrentInfo	proc infoHashUrlEncoded(info: TorrentInfo): string		70
+nim	parseTorrent	cps/bittorrent/metainfo.html#parseTorrent,string	proc parseTorrent(data: string): TorrentMetainfo		132
+nim	parseRawInfoDict	cps/bittorrent/metainfo.html#parseRawInfoDict,string,array[,byte]	proc parseRawInfoDict(rawInfoDict: string; infoHash: array[20, byte]): TorrentInfo		159
+nim	parseTorrentFile	cps/bittorrent/metainfo.html#parseTorrentFile,string	proc parseTorrentFile(path: string): TorrentMetainfo		171

@@ -1,0 +1,30 @@
+nimTitle	utils	cps/bittorrent/utils.html	module cps/bittorrent/utils		0
+nim	btRand	cps/bittorrent/utils.html#btRand,int	proc btRand(bound: int): int		20
+nim	btRandU32	cps/bittorrent/utils.html#btRandU32	proc btRandU32(): uint32		25
+nim	Crc32cTable	cps/bittorrent/utils.html#Crc32cTable	const Crc32cTable		34
+nim	crc32c	cps/bittorrent/utils.html#crc32c,openArray[byte]	proc crc32c(data: openArray[byte]): uint32		46
+nim	parseIpv4	cps/bittorrent/utils.html#parseIpv4,string	proc parseIpv4(ip: string): array[4, byte]		57
+nim	ipv4ToString	cps/bittorrent/utils.html#ipv4ToString,array[,byte]	proc ipv4ToString(b: array[4, byte]): string		78
+nim	parseIpv6Words	cps/bittorrent/utils.html#parseIpv6Words,string	proc parseIpv6Words(ip: string): array[8, uint16]		86
+nim	canonicalizeIpv6	cps/bittorrent/utils.html#canonicalizeIpv6,string	proc canonicalizeIpv6(ip: string): string		112
+nim	isIpv6	cps/bittorrent/utils.html#isIpv6,string	proc isIpv6(ip: string): bool		168
+nim	CompactPeer	cps/bittorrent/utils.html#CompactPeer	tuple CompactPeer		176
+nim	decodeCompactPeers	cps/bittorrent/utils.html#decodeCompactPeers,string	proc decodeCompactPeers(data: string): seq[CompactPeer]		178
+nim	encodeCompactPeers	cps/bittorrent/utils.html#encodeCompactPeers,seq[CompactPeer]	proc encodeCompactPeers(peers: seq[CompactPeer]): string		191
+nim	decodeCompactPeers6	cps/bittorrent/utils.html#decodeCompactPeers6,string	proc decodeCompactPeers6(data: string): seq[CompactPeer]		203
+nim	encodeCompactPeers6	cps/bittorrent/utils.html#encodeCompactPeers6,seq[CompactPeer]	proc encodeCompactPeers6(peers: seq[CompactPeer]): string		222
+nim	hexDigitToInt	cps/bittorrent/utils.html#hexDigitToInt,char	proc hexDigitToInt(c: char): int		237
+nim	hexToBytes	cps/bittorrent/utils.html#hexToBytes,string	proc hexToBytes(hex: string): seq[byte]		245
+nim	bytesToHex	cps/bittorrent/utils.html#bytesToHex,openArray[byte]	proc bytesToHex(data: openArray[byte]): string		251
+nim	percentDecode	cps/bittorrent/utils.html#percentDecode,string	proc percentDecode(s: string): string		259
+nim	writeUint32BE	cps/bittorrent/utils.html#writeUint32BE,string,uint32	proc writeUint32BE(s: var string; v: uint32)		277
+nim	readUint32BE	cps/bittorrent/utils.html#readUint32BE,string,int	proc readUint32BE(data: string; offset: int): uint32		284
+nim	readUint16BE	cps/bittorrent/utils.html#readUint16BE,string,int	proc readUint16BE(data: string; offset: int): uint16		291
+nim	writeUint16BE	cps/bittorrent/utils.html#writeUint16BE,string,uint16	proc writeUint16BE(s: var string; v: uint16)		295
+nim	writeUint64BE	cps/bittorrent/utils.html#writeUint64BE,string,uint64	proc writeUint64BE(s: var string; v: uint64)		300
+nim	readUint64BE	cps/bittorrent/utils.html#readUint64BE,string,int	proc readUint64BE(data: string; offset: int): uint64		311
+nim	writeInt32BE	cps/bittorrent/utils.html#writeInt32BE,string,int32	proc writeInt32BE(s: var string; v: int32)		316
+nim	readInt32BE	cps/bittorrent/utils.html#readInt32BE,string,int	proc readInt32BE(data: string; offset: int): int32		320
+nim	countBitsSet	cps/bittorrent/utils.html#countBitsSet,openArray[byte],int	proc countBitsSet(bitfield: openArray[byte]; totalBits: int): int		328
+nim	safeParseInt	cps/bittorrent/utils.html#safeParseInt,string,int	proc safeParseInt(s: string; default: int = 0): int		343
+nim	safeParseUint16	cps/bittorrent/utils.html#safeParseUint16,string,uint16	proc safeParseUint16(s: string; default: uint16 = 0): uint16		350

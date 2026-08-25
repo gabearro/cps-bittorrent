@@ -12,6 +12,9 @@ requires "https://github.com/gabearro/cps-tls == 1.0.0"
 task checkDocs, "Verify developer documentation coverage":
   exec "python3 scripts/check_dev_docs.py"
 
+task docs, "Generate the HTML API reference":
+  exec "python3 scripts/build_docs.py"
+
 task test, "Run the project test suite":
   exec "nim c -r tests/bittorrent/test_bencode.nim"
   exec "nim c -r tests/bittorrent/test_metainfo.nim"

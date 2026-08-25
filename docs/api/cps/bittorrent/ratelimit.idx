@@ -1,0 +1,20 @@
+nimTitle	ratelimit	cps/bittorrent/ratelimit.html	module cps/bittorrent/ratelimit		0
+nim	MinBurstBytes	cps/bittorrent/ratelimit.html#MinBurstBytes	const MinBurstBytes		30
+nim	MaxBurstBytes	cps/bittorrent/ratelimit.html#MaxBurstBytes	const MaxBurstBytes		31
+nim	MaxSleepMs	cps/bittorrent/ratelimit.html#MaxSleepMs	const MaxSleepMs		32
+nim	Upload	cps/bittorrent/ratelimit.html#Upload	Direction.Upload		36
+nim	Download	cps/bittorrent/ratelimit.html#Download	Direction.Download		36
+nim	Direction	cps/bittorrent/ratelimit.html#Direction	enum Direction		36
+nim	TokenBucket	cps/bittorrent/ratelimit.html#TokenBucket	object TokenBucket		39
+nim	BandwidthLimiter	cps/bittorrent/ratelimit.html#BandwidthLimiter	type BandwidthLimiter		46
+nim	initTokenBucket	cps/bittorrent/ratelimit.html#initTokenBucket,int,int	proc initTokenBucket(bps: int; percent: int): TokenBucket		51
+nim	refill	cps/bittorrent/ratelimit.html#refill,TokenBucket	proc refill(bucket: var TokenBucket)		65
+nim	debtSleepMs	cps/bittorrent/ratelimit.html#debtSleepMs,TokenBucket	proc debtSleepMs(bucket: TokenBucket): int		77
+nim	consumeWithDebt	cps/bittorrent/ratelimit.html#consumeWithDebt,TokenBucket,int	proc consumeWithDebt(bucket: var TokenBucket; bytes: int): int		87
+nim	newBandwidthLimiter	cps/bittorrent/ratelimit.html#newBandwidthLimiter,int,int,int	proc newBandwidthLimiter(uploadBps: int = 0; downloadBps: int = 0; percent: int = 80): BandwidthLimiter		105
+nim	isLimited	cps/bittorrent/ratelimit.html#isLimited,BandwidthLimiter,Direction	proc isLimited(limiter: BandwidthLimiter; dir: Direction): bool		119
+nim	effectiveRate	cps/bittorrent/ratelimit.html#effectiveRate,BandwidthLimiter,Direction	proc effectiveRate(limiter: BandwidthLimiter; dir: Direction): float		123
+nim	refund	cps/bittorrent/ratelimit.html#refund,BandwidthLimiter,int,Direction	proc refund(limiter: BandwidthLimiter; bytes: int; dir: Direction)		127
+nim	waitForBudget	cps/bittorrent/ratelimit.html#waitForBudget,BandwidthLimiter,Direction	proc waitForBudget(limiter: BandwidthLimiter; dir: Direction): CpsVoidFuture		2410
+nim	consume	cps/bittorrent/ratelimit.html#consume,BandwidthLimiter,int,Direction	proc consume(limiter: BandwidthLimiter; bytes: int; dir: Direction): CpsVoidFuture		2410
+nim	updateLimits	cps/bittorrent/ratelimit.html#updateLimits,BandwidthLimiter,int,int,int	proc updateLimits(limiter: BandwidthLimiter; uploadBps: int = 0;\n             downloadBps: int = 0; percent: int = 0)		164

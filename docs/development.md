@@ -50,8 +50,12 @@ Storage methods describe offsets and failure behavior.
 
 ```sh
 nimble checkDocs
+nimble docs
 nimble test
 ```
+
+The generated Nim API reference is committed under `docs/api`; open
+`docs/api/theindex.html` to search exported symbols and their `##` docstrings.
 
 Use local peers and deterministic fixtures for the default suite. Public swarm
 tests are opt-in and must not be required to validate a release.

@@ -1,0 +1,5 @@
+nimTitle	fast_extension	cps/bittorrent/fast_extension.html	module cps/bittorrent/fast_extension		0
+nim	FastExtensionBit	cps/bittorrent/fast_extension.html#FastExtensionBit	const FastExtensionBit		10
+nim	supportsFastExtension	cps/bittorrent/fast_extension.html#supportsFastExtension,array[,byte]	proc supportsFastExtension(reserved: array[8, byte]): bool		12
+nim	setFastExtensionBit	cps/bittorrent/fast_extension.html#setFastExtensionBit,array[,byte]	proc setFastExtensionBit(reserved: var array[8, byte])		16
+nim	generateAllowedFastSet	cps/bittorrent/fast_extension.html#generateAllowedFastSet,array[,byte],string,int,int	proc generateAllowedFastSet(infoHash: array[20, byte]; ip: string; numPieces: int;\n                       setSize: int = 10): seq[uint32]		20

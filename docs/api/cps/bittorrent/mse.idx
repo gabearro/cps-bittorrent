@@ -1,0 +1,23 @@
+nimTitle	mse	cps/bittorrent/mse.html	module cps/bittorrent/mse		0
+nim	Rc4State	cps/bittorrent/mse.html#Rc4State	object Rc4State		36
+nim	initRc4	cps/bittorrent/mse.html#initRc4,openArray[byte]	proc initRc4(key: openArray[byte]): Rc4State		40
+nim	nextByte	cps/bittorrent/mse.html#nextByte,Rc4State	proc nextByte(state: var Rc4State): byte		49
+nim	processInPlace	cps/bittorrent/mse.html#processInPlace,Rc4State,string	proc processInPlace(state: var Rc4State; data: var string)		56
+nim	discardBytes	cps/bittorrent/mse.html#discardBytes,Rc4State,int	proc discardBytes(state: var Rc4State; n: int)		61
+nim	DhKeyLen	cps/bittorrent/mse.html#DhKeyLen	const DhKeyLen		69
+nim	MseCryptoPlaintext	cps/bittorrent/mse.html#MseCryptoPlaintext	const MseCryptoPlaintext		73
+nim	MseCryptoRc4	cps/bittorrent/mse.html#MseCryptoRc4	const MseCryptoRc4		74
+nim	emPreferEncrypted	cps/bittorrent/mse.html#emPreferEncrypted	EncryptionMode.emPreferEncrypted		94
+nim	emRequireEncrypted	cps/bittorrent/mse.html#emRequireEncrypted	EncryptionMode.emRequireEncrypted		94
+nim	emPreferPlaintext	cps/bittorrent/mse.html#emPreferPlaintext	EncryptionMode.emPreferPlaintext		94
+nim	emForceRc4	cps/bittorrent/mse.html#emForceRc4	EncryptionMode.emForceRc4		94
+nim	EncryptionMode	cps/bittorrent/mse.html#EncryptionMode	enum EncryptionMode		94
+nim	MseResult	cps/bittorrent/mse.html#MseResult	object MseResult		100
+nim	readExactRaw	cps/bittorrent/mse.html#readExactRaw,AsyncStream,int	proc readExactRaw(stream: AsyncStream; size: int): CpsFuture[string]		2410
+nim	dhGenerateKeyPair	cps/bittorrent/mse.html#dhGenerateKeyPair	proc dhGenerateKeyPair(): tuple[privKey: seq[byte], pubKey: array[DhKeyLen, byte]]		244
+nim	dhComputeSecret	cps/bittorrent/mse.html#dhComputeSecret,openArray[byte],seq[byte]	proc dhComputeSecret(remotePub: openArray[byte]; privKey: seq[byte]): array[DhKeyLen,\n    byte]		271
+nim	MseStream	cps/bittorrent/mse.html#MseStream	type MseStream		295
+nim	newMseStream	cps/bittorrent/mse.html#newMseStream,AsyncStream,Rc4State,Rc4State	proc newMseStream(inner: AsyncStream; enc, dec: Rc4State): MseStream		316
+nim	mseInitiate	cps/bittorrent/mse.html#mseInitiate,AsyncStream,array[,byte],uint32	proc mseInitiate(stream: AsyncStream; infoHash: array[20, byte];\n            cryptoProvide: uint32 = 0x00000002'u32 or 0x00000001'u32): CpsFuture[\n    MseResult]		2410
+nim	mseRespondMulti	cps/bittorrent/mse.html#mseRespondMulti,AsyncStream,seq[array[,byte]],string,bool	proc mseRespondMulti(stream: AsyncStream; infoHashes: seq[array[20, byte]];\n                yaData: string; preferRc4: bool = true): CpsFuture[MseResult]		2410
+nim	mseRespond	cps/bittorrent/mse.html#mseRespond,AsyncStream,array[,byte],string,bool	proc mseRespond(stream: AsyncStream; infoHash: array[20, byte]; yaData: string;\n           preferRc4: bool = true): CpsFuture[MseResult]		2410

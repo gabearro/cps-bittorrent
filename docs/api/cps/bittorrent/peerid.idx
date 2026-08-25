@@ -1,0 +1,13 @@
+nimTitle	peerid	cps/bittorrent/peerid.html	module cps/bittorrent/peerid		0
+nim	ClientId	cps/bittorrent/peerid.html#ClientId	const ClientId		13
+nim	VersionMajor	cps/bittorrent/peerid.html#VersionMajor	const VersionMajor		14
+nim	VersionMinor	cps/bittorrent/peerid.html#VersionMinor	const VersionMinor		15
+nim	VersionPatch	cps/bittorrent/peerid.html#VersionPatch	const VersionPatch		16
+nim	pisAzureus	cps/bittorrent/peerid.html#pisAzureus	PeerIdStyle.pisAzureus		24
+nim	pisShadow	cps/bittorrent/peerid.html#pisShadow	PeerIdStyle.pisShadow		24
+nim	pisUnknown	cps/bittorrent/peerid.html#pisUnknown	PeerIdStyle.pisUnknown		24
+nim	PeerIdStyle	cps/bittorrent/peerid.html#PeerIdStyle	enum PeerIdStyle		24
+nim	PeerIdInfo	cps/bittorrent/peerid.html#PeerIdInfo	object PeerIdInfo		29
+nim	generatePeerId	cps/bittorrent/peerid.html#generatePeerId	proc generatePeerId(): array[20, byte]		34
+nim	parsePeerId	cps/bittorrent/peerid.html#parsePeerId,array[,byte]	proc parsePeerId(peerId: array[20, byte]): PeerIdInfo		40
+nim	peerIdToString	cps/bittorrent/peerid.html#peerIdToString,array[,byte]	proc peerIdToString(peerId: array[20, byte]): string		94

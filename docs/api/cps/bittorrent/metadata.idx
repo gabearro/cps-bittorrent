@@ -1,0 +1,19 @@
+nimTitle	metadata	cps/bittorrent/metadata.html	module cps/bittorrent/metadata		0
+nim	UtMetadataName	cps/bittorrent/metadata.html#UtMetadataName	const UtMetadataName		13
+nim	MetadataBlockSize	cps/bittorrent/metadata.html#MetadataBlockSize	const MetadataBlockSize		14
+nim	mtRequest	cps/bittorrent/metadata.html#mtRequest	MetadataMsgType.mtRequest		17
+nim	mtData	cps/bittorrent/metadata.html#mtData	MetadataMsgType.mtData		17
+nim	mtReject	cps/bittorrent/metadata.html#mtReject	MetadataMsgType.mtReject		17
+nim	MetadataMsgType	cps/bittorrent/metadata.html#MetadataMsgType	enum MetadataMsgType		17
+nim	MetadataExchange	cps/bittorrent/metadata.html#MetadataExchange	type MetadataExchange		22
+nim	newMetadataExchange	cps/bittorrent/metadata.html#newMetadataExchange,array[,byte]	proc newMetadataExchange(infoHash: array[20, byte]): MetadataExchange		30
+nim	initFromSize	cps/bittorrent/metadata.html#initFromSize,MetadataExchange,int	proc initFromSize(me: MetadataExchange; size: int)		34
+nim	encodeMetadataRequest	cps/bittorrent/metadata.html#encodeMetadataRequest,int	proc encodeMetadataRequest(piece: int): string		45
+nim	encodeMetadataData	cps/bittorrent/metadata.html#encodeMetadataData,int,int,string	proc encodeMetadataData(piece: int; totalSize: int; data: string): string		52
+nim	encodeMetadataReject	cps/bittorrent/metadata.html#encodeMetadataReject,int	proc encodeMetadataReject(piece: int): string		60
+nim	decodeMetadataMsg	cps/bittorrent/metadata.html#decodeMetadataMsg,string	proc decodeMetadataMsg(payload: string): tuple[msgType: MetadataMsgType, piece: int,\n    totalSize: int, data: string]		69
+nim	receivePiece	cps/bittorrent/metadata.html#receivePiece,MetadataExchange,int,string	proc receivePiece(me: MetadataExchange; piece: int; data: string): bool		92
+nim	assembleAndVerify	cps/bittorrent/metadata.html#assembleAndVerify,MetadataExchange	proc assembleAndVerify(me: MetadataExchange): string		109
+nim	getNeededPieces	cps/bittorrent/metadata.html#getNeededPieces,MetadataExchange	proc getNeededPieces(me: MetadataExchange): seq[int]		125
+nim	getMetadataPiece	cps/bittorrent/metadata.html#getMetadataPiece,string,int	proc getMetadataPiece(infoDict: string; piece: int): string		131
+nim	parseMagnetLink	cps/bittorrent/metadata.html#parseMagnetLink,string	proc parseMagnetLink(uri: string): tuple[infoHash: array[20, byte],\n                                    displayName: string, trackers: seq[string],\n                                    selectedFiles: seq[int]]		165

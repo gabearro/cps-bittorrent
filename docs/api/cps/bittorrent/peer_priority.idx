@@ -1,0 +1,3 @@
+nimTitle	peer_priority	cps/bittorrent/peer_priority.html	module cps/bittorrent/peer_priority		0
+nim	peerPriority	cps/bittorrent/peer_priority.html#peerPriority,string,string	proc peerPriority(ourIp, peerIp: string): uint32		10
+nim	sortByPriority	cps/bittorrent/peer_priority.html#sortByPriority,seq[CompactPeer],string	proc sortByPriority(peers: var seq[CompactPeer]; ourIp: string)		33

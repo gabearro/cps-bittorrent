@@ -1,0 +1,51 @@
+nimTitle	utp	cps/bittorrent/utp.html	module cps/bittorrent/utp		0
+nim	UtpVersion	cps/bittorrent/utp.html#UtpVersion	const UtpVersion		11
+nim	UtpHeaderSize	cps/bittorrent/utp.html#UtpHeaderSize	const UtpHeaderSize		12
+nim	StData	cps/bittorrent/utp.html#StData	const StData		15
+nim	StFin	cps/bittorrent/utp.html#StFin	const StFin		16
+nim	StState	cps/bittorrent/utp.html#StState	const StState		17
+nim	StReset	cps/bittorrent/utp.html#StReset	const StReset		18
+nim	StSyn	cps/bittorrent/utp.html#StSyn	const StSyn		19
+nim	DefaultWindowSize	cps/bittorrent/utp.html#DefaultWindowSize	const DefaultWindowSize		22
+nim	MinPacketSize	cps/bittorrent/utp.html#MinPacketSize	const MinPacketSize		23
+nim	MaxPacketSize	cps/bittorrent/utp.html#MaxPacketSize	const MaxPacketSize		24
+nim	MinCwndBytes	cps/bittorrent/utp.html#MinCwndBytes	const MinCwndBytes		25
+nim	MaxCwndIncrease	cps/bittorrent/utp.html#MaxCwndIncrease	const MaxCwndIncrease		26
+nim	SynTimeout	cps/bittorrent/utp.html#SynTimeout	const SynTimeout		27
+nim	ConnTimeout	cps/bittorrent/utp.html#ConnTimeout	const ConnTimeout		28
+nim	MaxRetransmit	cps/bittorrent/utp.html#MaxRetransmit	const MaxRetransmit		29
+nim	PacketLossTimeout	cps/bittorrent/utp.html#PacketLossTimeout	const PacketLossTimeout		30
+nim	DelayTarget	cps/bittorrent/utp.html#DelayTarget	const DelayTarget		31
+nim	MaxDelayMicros	cps/bittorrent/utp.html#MaxDelayMicros	const MaxDelayMicros		32
+nim	BaseDelaySlots	cps/bittorrent/utp.html#BaseDelaySlots	const BaseDelaySlots		33
+nim	BaseDelayInterval	cps/bittorrent/utp.html#BaseDelayInterval	const BaseDelayInterval		34
+nim	usIdle	cps/bittorrent/utp.html#usIdle	UtpState.usIdle		37
+nim	usSynSent	cps/bittorrent/utp.html#usSynSent	UtpState.usSynSent		37
+nim	usSynRecv	cps/bittorrent/utp.html#usSynRecv	UtpState.usSynRecv		37
+nim	usConnected	cps/bittorrent/utp.html#usConnected	UtpState.usConnected		37
+nim	usFinSent	cps/bittorrent/utp.html#usFinSent	UtpState.usFinSent		37
+nim	usReset	cps/bittorrent/utp.html#usReset	UtpState.usReset		37
+nim	usDestroyed	cps/bittorrent/utp.html#usDestroyed	UtpState.usDestroyed		37
+nim	UtpState	cps/bittorrent/utp.html#UtpState	enum UtpState		37
+nim	UtpPacketHeader	cps/bittorrent/utp.html#UtpPacketHeader	object UtpPacketHeader		46
+nim	UtpPacket	cps/bittorrent/utp.html#UtpPacket	object UtpPacket		57
+nim	OutstandingPacket	cps/bittorrent/utp.html#OutstandingPacket	object OutstandingPacket		62
+nim	UtpSocket	cps/bittorrent/utp.html#UtpSocket	type UtpSocket		68
+nim	seqNrAfter	cps/bittorrent/utp.html#seqNrAfter,uint16,uint16	proc seqNrAfter(a, b: uint16): bool		109
+nim	newUtpSocket	cps/bittorrent/utp.html#newUtpSocket,uint16	proc newUtpSocket(connId: uint16): UtpSocket		113
+nim	updateBaseDelay	cps/bittorrent/utp.html#updateBaseDelay,UtpSocket,uint32	proc updateBaseDelay(sock: UtpSocket; delaySample: uint32)		137
+nim	getBaseDelay	cps/bittorrent/utp.html#getBaseDelay,UtpSocket	proc getBaseDelay(sock: UtpSocket): uint32		161
+nim	computeTimestampDiff	cps/bittorrent/utp.html#computeTimestampDiff,UtpSocket	proc computeTimestampDiff(sock: UtpSocket): uint32		171
+nim	encodeHeader	cps/bittorrent/utp.html#encodeHeader,UtpPacketHeader	proc encodeHeader(h: UtpPacketHeader): string		181
+nim	decodeHeader	cps/bittorrent/utp.html#decodeHeader,string	proc decodeHeader(data: string): UtpPacketHeader		194
+nim	decodePacket	cps/bittorrent/utp.html#decodePacket,string	proc decodePacket(data: string): UtpPacket		209
+nim	encodePacket	cps/bittorrent/utp.html#encodePacket,UtpPacket	proc encodePacket(pkt: UtpPacket): string		236
+nim	makeSynPacket	cps/bittorrent/utp.html#makeSynPacket,UtpSocket	proc makeSynPacket(sock: UtpSocket): string		267
+nim	makeStatePacket	cps/bittorrent/utp.html#makeStatePacket,UtpSocket	proc makeStatePacket(sock: UtpSocket): string		274
+nim	makeDataPacket	cps/bittorrent/utp.html#makeDataPacket,UtpSocket,string	proc makeDataPacket(sock: UtpSocket; payload: string): string		278
+nim	makeFinPacket	cps/bittorrent/utp.html#makeFinPacket,UtpSocket	proc makeFinPacket(sock: UtpSocket): string		292
+nim	makeResetPacket	cps/bittorrent/utp.html#makeResetPacket,UtpSocket	proc makeResetPacket(sock: UtpSocket): string		299
+nim	processIncoming	cps/bittorrent/utp.html#processIncoming,UtpSocket,string	proc processIncoming(sock: UtpSocket; data: string): tuple[response: string,\n    payload: string, stateChanged: bool]		368
+nim	canSend	cps/bittorrent/utp.html#canSend,UtpSocket	proc canSend(sock: UtpSocket): bool		475
+nim	sendWindowAvailable	cps/bittorrent/utp.html#sendWindowAvailable,UtpSocket	proc sendWindowAvailable(sock: UtpSocket): int		481
+nim	checkTimeouts	cps/bittorrent/utp.html#checkTimeouts,UtpSocket	proc checkTimeouts(sock: UtpSocket): seq[string]		487

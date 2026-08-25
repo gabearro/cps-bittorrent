@@ -1,0 +1,17 @@
+nimTitle	webseed	cps/bittorrent/webseed.html	module cps/bittorrent/webseed		0
+nim	WebSeedError	cps/bittorrent/webseed.html#WebSeedError	object WebSeedError		20
+nim	wssIdle	cps/bittorrent/webseed.html#wssIdle	WebSeedState.wssIdle		22
+nim	wssDownloading	cps/bittorrent/webseed.html#wssDownloading	WebSeedState.wssDownloading		22
+nim	wssFailed	cps/bittorrent/webseed.html#wssFailed	WebSeedState.wssFailed		22
+nim	WebSeedState	cps/bittorrent/webseed.html#WebSeedState	enum WebSeedState		22
+nim	WebSeed	cps/bittorrent/webseed.html#WebSeed	type WebSeed		27
+nim	WebSeedRange	cps/bittorrent/webseed.html#WebSeedRange	object WebSeedRange		33
+nim	WebSeedConn	cps/bittorrent/webseed.html#WebSeedConn	type WebSeedConn		40
+nim	newWebSeed	cps/bittorrent/webseed.html#newWebSeed,string	proc newWebSeed(url: string): WebSeed		48
+nim	buildRangeUrl	cps/bittorrent/webseed.html#buildRangeUrl,string,TorrentInfo,int,int,int	proc buildRangeUrl(baseUrl: string; info: TorrentInfo; pieceIdx, offset, length: int): WebSeedRange		83
+nim	buildPieceRanges	cps/bittorrent/webseed.html#buildPieceRanges,string,TorrentInfo,int,int,int	proc buildPieceRanges(baseUrl: string; info: TorrentInfo; pieceIdx, pieceLength: int;\n                 maxChunk: int = 16384): seq[WebSeedRange]		110
+nim	openWebSeedConn	cps/bittorrent/webseed.html#openWebSeedConn,string	proc openWebSeedConn(url: string): CpsFuture[WebSeedConn]		2410
+nim	close	cps/bittorrent/webseed.html#close,WebSeedConn	proc close(conn: WebSeedConn)		166
+nim	fetchRange	cps/bittorrent/webseed.html#fetchRange,WebSeedConn,string,int64,int64	proc fetchRange(conn: WebSeedConn; url: string; rangeStart, rangeEnd: int64): CpsFuture[\n    string]		2410
+nim	httpRangeRequest	cps/bittorrent/webseed.html#httpRangeRequest,string,int64,int64	proc httpRangeRequest(url: string; rangeStart, rangeEnd: int64): CpsFuture[string]		2410
+nim	parseWebSeeds	cps/bittorrent/webseed.html#parseWebSeeds,TorrentMetainfo	proc parseWebSeeds(metainfo: TorrentMetainfo): seq[string]		273

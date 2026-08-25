@@ -1,0 +1,10 @@
+nimTitle	storage	cps/bittorrent/storage.html	module cps/bittorrent/storage		0
+nim	StorageManager	cps/bittorrent/storage.html#StorageManager	type StorageManager		16
+nim	StorageError	cps/bittorrent/storage.html#StorageError	object StorageError		22
+nim	newStorageManager	cps/bittorrent/storage.html#newStorageManager,TorrentInfo,string	proc newStorageManager(info: TorrentInfo; baseDir: string): StorageManager		24
+nim	closeFiles	cps/bittorrent/storage.html#closeFiles,StorageManager	proc closeFiles(sm: StorageManager)		49
+nim	openFiles	cps/bittorrent/storage.html#openFiles,StorageManager	proc openFiles(sm: StorageManager)		57
+nim	writePiece	cps/bittorrent/storage.html#writePiece,StorageManager,int,string	proc writePiece(sm: StorageManager; pieceIdx: int; data: string; flush = true)		122
+nim	readBlock	cps/bittorrent/storage.html#readBlock,StorageManager,int,int,int	proc readBlock(sm: StorageManager; pieceIdx: int; offset: int; length: int): string		137
+nim	readPiece	cps/bittorrent/storage.html#readPiece,StorageManager,int,int	proc readPiece(sm: StorageManager; pieceIdx: int; length: int): string		145
+nim	verifyExistingFiles	cps/bittorrent/storage.html#verifyExistingFiles,StorageManager,TorrentInfo	proc verifyExistingFiles(sm: StorageManager; info: TorrentInfo): seq[bool]		149

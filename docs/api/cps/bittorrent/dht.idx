@@ -1,0 +1,68 @@
+nimTitle	dht	cps/bittorrent/dht.html	module cps/bittorrent/dht		0
+nim	K	cps/bittorrent/dht.html#K	const K		13
+nim	Alpha	cps/bittorrent/dht.html#Alpha	const Alpha		14
+nim	NodeIdLen	cps/bittorrent/dht.html#NodeIdLen	const NodeIdLen		15
+nim	DhtPort	cps/bittorrent/dht.html#DhtPort	const DhtPort		16
+nim	TokenLifetime	cps/bittorrent/dht.html#TokenLifetime	const TokenLifetime		17
+nim	BucketRefreshInterval	cps/bittorrent/dht.html#BucketRefreshInterval	const BucketRefreshInterval		18
+nim	MaxTokenAge	cps/bittorrent/dht.html#MaxTokenAge	const MaxTokenAge		19
+nim	NodeId	cps/bittorrent/dht.html#NodeId	type NodeId		23
+nim	DhtNode	cps/bittorrent/dht.html#DhtNode	object DhtNode		25
+nim	Bucket	cps/bittorrent/dht.html#Bucket	object Bucket		33
+nim	RoutingTable	cps/bittorrent/dht.html#RoutingTable	object RoutingTable		39
+nim	dqPing	cps/bittorrent/dht.html#dqPing	DhtQueryKind.dqPing		43
+nim	dqFindNode	cps/bittorrent/dht.html#dqFindNode	DhtQueryKind.dqFindNode		43
+nim	dqGetPeers	cps/bittorrent/dht.html#dqGetPeers	DhtQueryKind.dqGetPeers		43
+nim	dqAnnouncePeer	cps/bittorrent/dht.html#dqAnnouncePeer	DhtQueryKind.dqAnnouncePeer		43
+nim	DhtQueryKind	cps/bittorrent/dht.html#DhtQueryKind	enum DhtQueryKind		43
+nim	drPing	cps/bittorrent/dht.html#drPing	DhtResponseKind.drPing		49
+nim	drFindNode	cps/bittorrent/dht.html#drFindNode	DhtResponseKind.drFindNode		49
+nim	drGetPeers	cps/bittorrent/dht.html#drGetPeers	DhtResponseKind.drGetPeers		49
+nim	drAnnouncePeer	cps/bittorrent/dht.html#drAnnouncePeer	DhtResponseKind.drAnnouncePeer		49
+nim	drError	cps/bittorrent/dht.html#drError	DhtResponseKind.drError		49
+nim	DhtResponseKind	cps/bittorrent/dht.html#DhtResponseKind	enum DhtResponseKind		49
+nim	CompactNodeInfo	cps/bittorrent/dht.html#CompactNodeInfo	object CompactNodeInfo		56
+nim	DhtMessage	cps/bittorrent/dht.html#DhtMessage	object DhtMessage		61
+nim	xorDistance	cps/bittorrent/dht.html#xorDistance,NodeId,NodeId	proc xorDistance(a, b: NodeId): NodeId		83
+nim	`<`	cps/bittorrent/dht.html#<,NodeId,NodeId	proc `<`(a, b: NodeId): bool		88
+nim	`==`	cps/bittorrent/dht.html#==,NodeId,NodeId	proc `==`(a, b: NodeId): bool		96
+nim	`<=`	cps/bittorrent/dht.html#<=,NodeId,NodeId	proc `<=`(a, b: NodeId): bool		102
+nim	hash	cps/bittorrent/dht.html#hash,NodeId	proc hash(id: NodeId): Hash		108
+nim	bucketIndex	cps/bittorrent/dht.html#bucketIndex,NodeId,NodeId	proc bucketIndex(ownId: NodeId; nodeId: NodeId): int		115
+nim	generateNodeId	cps/bittorrent/dht.html#generateNodeId	proc generateNodeId(): NodeId		129
+nim	nodeIdToStr	cps/bittorrent/dht.html#nodeIdToStr,NodeId	proc nodeIdToStr(id: NodeId): string		135
+nim	strToNodeId	cps/bittorrent/dht.html#strToNodeId,string	proc strToNodeId(s: string): NodeId		141
+nim	generateSecureNodeId	cps/bittorrent/dht.html#generateSecureNodeId,string	proc generateSecureNodeId(ip: string): NodeId		173
+nim	isValidSecureNodeId	cps/bittorrent/dht.html#isValidSecureNodeId,NodeId,string	proc isValidSecureNodeId(nodeId: NodeId; ip: string): bool		199
+nim	nodeIdToHex	cps/bittorrent/dht.html#nodeIdToHex,NodeId	proc nodeIdToHex(id: NodeId): string		219
+nim	hexToNodeId	cps/bittorrent/dht.html#hexToNodeId,string	proc hexToNodeId(s: string): NodeId		223
+nim	newRoutingTable	cps/bittorrent/dht.html#newRoutingTable,NodeId	proc newRoutingTable(ownId: NodeId): RoutingTable		231
+nim	midpoint	cps/bittorrent/dht.html#midpoint,NodeId,NodeId	proc midpoint(a, b: NodeId): NodeId		253
+nim	addNode	cps/bittorrent/dht.html#addNode,RoutingTable,DhtNode	proc addNode(rt: var RoutingTable; node: DhtNode): bool		353
+nim	findClosest	cps/bittorrent/dht.html#findClosest,RoutingTable,NodeId,int	proc findClosest(rt: RoutingTable; target: NodeId; count: int = K): seq[DhtNode]		357
+nim	markFailed	cps/bittorrent/dht.html#markFailed,RoutingTable,NodeId	proc markFailed(rt: var RoutingTable; id: NodeId)		382
+nim	removeNode	cps/bittorrent/dht.html#removeNode,RoutingTable,NodeId	proc removeNode(rt: var RoutingTable; id: NodeId)		390
+nim	totalNodes	cps/bittorrent/dht.html#totalNodes,RoutingTable	proc totalNodes(rt: RoutingTable): int		400
+nim	staleBuckets	cps/bittorrent/dht.html#staleBuckets,RoutingTable,float	proc staleBuckets(rt: RoutingTable; maxAgeSec: float): seq[int]		405
+nim	leastRecentlySeenNode	cps/bittorrent/dht.html#leastRecentlySeenNode,RoutingTable,int	proc leastRecentlySeenNode(rt: RoutingTable; bucketIdx: int): DhtNode		412
+nim	encodeCompactNode	cps/bittorrent/dht.html#encodeCompactNode,CompactNodeInfo	proc encodeCompactNode(node: CompactNodeInfo): string		423
+nim	encodeCompactNode6	cps/bittorrent/dht.html#encodeCompactNode6,CompactNodeInfo	proc encodeCompactNode6(node: CompactNodeInfo): string		432
+nim	decodeCompactNodes	cps/bittorrent/dht.html#decodeCompactNodes,string	proc decodeCompactNodes(data: string): seq[CompactNodeInfo]		441
+nim	decodeCompactNodes6	cps/bittorrent/dht.html#decodeCompactNodes6,string	proc decodeCompactNodes6(data: string): seq[CompactNodeInfo]		457
+nim	encodeDhtQuery	cps/bittorrent/dht.html#encodeDhtQuery,string,string,Table[string,BencodeValue]	proc encodeDhtQuery(transId: string; queryType: string;\n               args: Table[string, BencodeValue]): string		479
+nim	encodeDhtResponse	cps/bittorrent/dht.html#encodeDhtResponse,string,Table[string,BencodeValue]	proc encodeDhtResponse(transId: string; resp: Table[string, BencodeValue]): string		489
+nim	encodeDhtError	cps/bittorrent/dht.html#encodeDhtError,string,int,string	proc encodeDhtError(transId: string; code: int; msg: string): string		498
+nim	encodePingQuery	cps/bittorrent/dht.html#encodePingQuery,string,NodeId	proc encodePingQuery(transId: string; ownId: NodeId): string		508
+nim	encodeFindNodeQuery	cps/bittorrent/dht.html#encodeFindNodeQuery,string,NodeId,NodeId	proc encodeFindNodeQuery(transId: string; ownId: NodeId; target: NodeId): string		514
+nim	encodeGetPeersQuery	cps/bittorrent/dht.html#encodeGetPeersQuery,string,NodeId,NodeId	proc encodeGetPeersQuery(transId: string; ownId: NodeId; infoHash: NodeId): string		521
+nim	encodeAnnouncePeerQuery	cps/bittorrent/dht.html#encodeAnnouncePeerQuery,string,NodeId,NodeId,uint16,string,bool	proc encodeAnnouncePeerQuery(transId: string; ownId: NodeId; infoHash: NodeId;\n                        port: uint16; token: string; impliedPort: bool = false): string		528
+nim	encodePingResponse	cps/bittorrent/dht.html#encodePingResponse,string,NodeId	proc encodePingResponse(transId: string; ownId: NodeId): string		572
+nim	encodeFindNodeResponse	cps/bittorrent/dht.html#encodeFindNodeResponse,string,NodeId,seq[CompactNodeInfo]	proc encodeFindNodeResponse(transId: string; ownId: NodeId;\n                       nodes: seq[CompactNodeInfo]): string		578
+nim	encodeGetPeersResponse	cps/bittorrent/dht.html#encodeGetPeersResponse,string,NodeId,string,seq[tuple[string,uint16]],seq[CompactNodeInfo]	proc encodeGetPeersResponse(transId: string; ownId: NodeId; token: string;\n                       peers: seq[tuple[ip: string, port: uint16]] = @[];\n                       nodes: seq[CompactNodeInfo] = @[]): string		586
+nim	decodeDhtMessage	cps/bittorrent/dht.html#decodeDhtMessage,string	proc decodeDhtMessage(data: string): DhtMessage		615
+nim	generateToken	cps/bittorrent/dht.html#generateToken,string,string	proc generateToken(ip: string; secret: string): string		721
+nim	validateToken	cps/bittorrent/dht.html#validateToken,string,string,string,string	proc validateToken(token: string; ip: string; secret: string; prevSecret: string): bool		729
+nim	DhtPeerStore	cps/bittorrent/dht.html#DhtPeerStore	object DhtPeerStore		739
+nim	addPeer	cps/bittorrent/dht.html#addPeer,DhtPeerStore,NodeId,string,uint16	proc addPeer(store: var DhtPeerStore; infoHash: NodeId; ip: string; port: uint16)		742
+nim	getPeers	cps/bittorrent/dht.html#getPeers,DhtPeerStore,NodeId	proc getPeers(store: DhtPeerStore; infoHash: NodeId): seq[\n    tuple[ip: string, port: uint16]]		755
+nim	expirePeers	cps/bittorrent/dht.html#expirePeers,DhtPeerStore,float	proc expirePeers(store: var DhtPeerStore; ttlSec: float)		761

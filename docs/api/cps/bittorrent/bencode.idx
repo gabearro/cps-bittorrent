@@ -1,0 +1,32 @@
+nimTitle	bencode	cps/bittorrent/bencode.html	module cps/bittorrent/bencode		0
+nim	bkInt	cps/bittorrent/bencode.html#bkInt	BencodeKind.bkInt		15
+nim	bkStr	cps/bittorrent/bencode.html#bkStr	BencodeKind.bkStr		15
+nim	bkList	cps/bittorrent/bencode.html#bkList	BencodeKind.bkList		15
+nim	bkDict	cps/bittorrent/bencode.html#bkDict	BencodeKind.bkDict		15
+nim	BencodeKind	cps/bittorrent/bencode.html#BencodeKind	enum BencodeKind		15
+nim	BencodeValue	cps/bittorrent/bencode.html#BencodeValue	type BencodeValue		21
+nim	BencodeError	cps/bittorrent/bencode.html#BencodeError	object BencodeError		32
+nim	bInt	cps/bittorrent/bencode.html#bInt,int64	proc bInt(v: int64): BencodeValue		35
+nim	bStr	cps/bittorrent/bencode.html#bStr,string	proc bStr(v: string): BencodeValue		39
+nim	bList	cps/bittorrent/bencode.html#bList,varargs[BencodeValue]	proc bList(items: varargs[BencodeValue]): BencodeValue		43
+nim	bDict	cps/bittorrent/bencode.html#bDict	proc bDict(): BencodeValue		47
+nim	bDict	cps/bittorrent/bencode.html#bDict,Table[string,BencodeValue]	proc bDict(t: Table[string, BencodeValue]): BencodeValue		51
+nim	dictKeys	cps/bittorrent/bencode.html#dictKeys.i,BencodeValue	iterator dictKeys(d: BencodeValue): string		58
+nim	`[]=`	cps/bittorrent/bencode.html#[]=,BencodeValue,string,BencodeValue	proc `[]=`(d: BencodeValue; key: string; val: BencodeValue)		65
+nim	`[]`	cps/bittorrent/bencode.html#[],BencodeValue,string	proc `[]`(d: BencodeValue; key: string): BencodeValue		69
+nim	contains	cps/bittorrent/bencode.html#contains,BencodeValue,string	proc contains(d: BencodeValue; key: string): bool		74
+nim	getOrDefault	cps/bittorrent/bencode.html#getOrDefault,BencodeValue,string	proc getOrDefault(d: BencodeValue; key: string): BencodeValue		78
+nim	requireStr	cps/bittorrent/bencode.html#requireStr,BencodeValue,string,string	proc requireStr(d: BencodeValue; key: string; context: string = ""): string		97
+nim	requireInt	cps/bittorrent/bencode.html#requireInt,BencodeValue,string,string	proc requireInt(d: BencodeValue; key: string; context: string = ""): int64		101
+nim	requireDict	cps/bittorrent/bencode.html#requireDict,BencodeValue,string,string	proc requireDict(d: BencodeValue; key: string; context: string = ""): BencodeValue		105
+nim	optStr	cps/bittorrent/bencode.html#optStr,BencodeValue,string	proc optStr(d: BencodeValue; key: string): string		112
+nim	optInt	cps/bittorrent/bencode.html#optInt,BencodeValue,string	proc optInt(d: BencodeValue; key: string): int64		117
+nim	optStrList	cps/bittorrent/bencode.html#optStrList,BencodeValue,string	proc optStrList(d: BencodeValue; key: string): seq[string]		122
+nim	len	cps/bittorrent/bencode.html#len,BencodeValue	proc len(v: BencodeValue): int		134
+nim	`$`	cps/bittorrent/bencode.html#$,BencodeValue	proc `$`(v: BencodeValue): string		142
+nim	encodeInto	cps/bittorrent/bencode.html#encodeInto,BencodeValue,string	proc encodeInto(v: BencodeValue; result: var string)		169
+nim	encode	cps/bittorrent/bencode.html#encode,BencodeValue	proc encode(v: BencodeValue): string		196
+nim	decode	cps/bittorrent/bencode.html#decode,string	proc decode(data: string): BencodeValue		316
+nim	decodePartial	cps/bittorrent/bencode.html#decodePartial,string,int	proc decodePartial(data: string; startPos: int = 0): tuple[value: BencodeValue,\n    endPos: int]		323
+nim	extractRawValue	cps/bittorrent/bencode.html#extractRawValue,string,string	proc extractRawValue(data: string; key: string): string		330
+nimgrp	bdict	cps/bittorrent/bencode.html#bDict-procs-all	proc		47

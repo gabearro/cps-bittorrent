@@ -1,0 +1,8 @@
+nimTitle	lsd	cps/bittorrent/lsd.html	module cps/bittorrent/lsd		0
+nim	LsdMulticastAddr	cps/bittorrent/lsd.html#LsdMulticastAddr	const LsdMulticastAddr		11
+nim	LsdPort	cps/bittorrent/lsd.html#LsdPort	const LsdPort		12
+nim	LsdAnnounceInterval	cps/bittorrent/lsd.html#LsdAnnounceInterval	const LsdAnnounceInterval		13
+nim	LsdMaxAnnounceRate	cps/bittorrent/lsd.html#LsdMaxAnnounceRate	const LsdMaxAnnounceRate		14
+nim	LsdAnnounce	cps/bittorrent/lsd.html#LsdAnnounce	object LsdAnnounce		17
+nim	encodeLsdAnnounce	cps/bittorrent/lsd.html#encodeLsdAnnounce,array[,byte],uint16,string	proc encodeLsdAnnounce(infoHash: array[20, byte]; port: uint16; cookie: string = ""): string		28
+nim	decodeLsdAnnounce	cps/bittorrent/lsd.html#decodeLsdAnnounce,string	proc decodeLsdAnnounce(data: string): seq[LsdAnnounce]		48

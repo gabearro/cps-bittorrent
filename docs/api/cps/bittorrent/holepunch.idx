@@ -1,0 +1,43 @@
+nimTitle	holepunch	cps/bittorrent/holepunch.html	module cps/bittorrent/holepunch		0
+nim	UtHolepunchName	cps/bittorrent/holepunch.html#UtHolepunchName	const UtHolepunchName		11
+nim	HpRendezvous	cps/bittorrent/holepunch.html#HpRendezvous	const HpRendezvous		14
+nim	HpConnect	cps/bittorrent/holepunch.html#HpConnect	const HpConnect		15
+nim	HpError	cps/bittorrent/holepunch.html#HpError	const HpError		16
+nim	AddrIPv4	cps/bittorrent/holepunch.html#AddrIPv4	const AddrIPv4		19
+nim	AddrIPv6	cps/bittorrent/holepunch.html#AddrIPv6	const AddrIPv6		20
+nim	HpErrNoSuchPeer	cps/bittorrent/holepunch.html#HpErrNoSuchPeer	const HpErrNoSuchPeer		23
+nim	HpErrNotConnected	cps/bittorrent/holepunch.html#HpErrNotConnected	const HpErrNotConnected		24
+nim	HpErrNoSupport	cps/bittorrent/holepunch.html#HpErrNoSupport	const HpErrNoSupport		25
+nim	HpErrNoSelf	cps/bittorrent/holepunch.html#HpErrNoSelf	const HpErrNoSelf		26
+nim	HolepunchMsg	cps/bittorrent/holepunch.html#HolepunchMsg	object HolepunchMsg		29
+nim	encodeHolepunchMsg	cps/bittorrent/holepunch.html#encodeHolepunchMsg,HolepunchMsg	proc encodeHolepunchMsg(msg: HolepunchMsg): string		36
+nim	decodeHolepunchMsg	cps/bittorrent/holepunch.html#decodeHolepunchMsg,string	proc decodeHolepunchMsg(data: string): HolepunchMsg		90
+nim	rendezvousMsg	cps/bittorrent/holepunch.html#rendezvousMsg,string,uint16	proc rendezvousMsg(ip: string; port: uint16): HolepunchMsg		132
+nim	connectMsg	cps/bittorrent/holepunch.html#connectMsg,string,uint16	proc connectMsg(ip: string; port: uint16): HolepunchMsg		142
+nim	errorMsg	cps/bittorrent/holepunch.html#errorMsg,string,uint16,uint32	proc errorMsg(ip: string; port: uint16; errCode: uint32): HolepunchMsg		152
+nim	errorName	cps/bittorrent/holepunch.html#errorName,uint32	proc errorName(code: uint32): string		162
+nim	DefaultRetrySec	cps/bittorrent/holepunch.html#DefaultRetrySec	const DefaultRetrySec		176
+nim	DefaultErrorBackoffSec	cps/bittorrent/holepunch.html#DefaultErrorBackoffSec	const DefaultErrorBackoffSec		177
+nim	BackoffMultiplier	cps/bittorrent/holepunch.html#BackoffMultiplier	const BackoffMultiplier		178
+nim	MaxBackoffSec	cps/bittorrent/holepunch.html#MaxBackoffSec	const MaxBackoffSec		179
+nim	DefaultExpectedSec	cps/bittorrent/holepunch.html#DefaultExpectedSec	const DefaultExpectedSec		180
+nim	MaxCandidatesPerCycle	cps/bittorrent/holepunch.html#MaxCandidatesPerCycle	const MaxCandidatesPerCycle		181
+nim	MaxRelaysPerTarget	cps/bittorrent/holepunch.html#MaxRelaysPerTarget	const MaxRelaysPerTarget		182
+nim	HolepunchState	cps/bittorrent/holepunch.html#HolepunchState	object HolepunchState		185
+nim	removeTarget	cps/bittorrent/holepunch.html#removeTarget,HolepunchState,string	proc removeTarget(hp: var HolepunchState; targetKey: string)		197
+nim	initHolepunchState	cps/bittorrent/holepunch.html#initHolepunchState	proc initHolepunchState(): HolepunchState		199
+nim	isBackedOff	cps/bittorrent/holepunch.html#isBackedOff,HolepunchState,string	proc isBackedOff(hp: HolepunchState; key: string): bool		210
+nim	isBackedOff	cps/bittorrent/holepunch.html#isBackedOff,HolepunchState,string,float	proc isBackedOff(hp: HolepunchState; key: string; nowTs: float): bool		215
+nim	isInFlight	cps/bittorrent/holepunch.html#isInFlight,HolepunchState,string	proc isInFlight(hp: HolepunchState; key: string): bool		220
+nim	isExpected	cps/bittorrent/holepunch.html#isExpected,HolepunchState,string	proc isExpected(hp: HolepunchState; key: string): bool		224
+nim	clearInFlight	cps/bittorrent/holepunch.html#clearInFlight,HolepunchState,string	proc clearInFlight(hp: var HolepunchState; key: string)		229
+nim	clearExpected	cps/bittorrent/holepunch.html#clearExpected,HolepunchState,string	proc clearExpected(hp: var HolepunchState; key: string)		233
+nim	markInFlight	cps/bittorrent/holepunch.html#markInFlight,HolepunchState,string	proc markInFlight(hp: var HolepunchState; key: string)		237
+nim	recordSuccess	cps/bittorrent/holepunch.html#recordSuccess,HolepunchState,string	proc recordSuccess(hp: var HolepunchState; key: string)		242
+nim	recordError	cps/bittorrent/holepunch.html#recordError,HolepunchState,string,uint32	proc recordError(hp: var HolepunchState; key: string; errCode: uint32)		253
+nim	recordAttempt	cps/bittorrent/holepunch.html#recordAttempt,HolepunchState,string	proc recordAttempt(hp: var HolepunchState; key: string)		263
+nim	recordDisconnect	cps/bittorrent/holepunch.html#recordDisconnect,HolepunchState,string	proc recordDisconnect(hp: var HolepunchState; key: string)		273
+nim	recordRelay	cps/bittorrent/holepunch.html#recordRelay,HolepunchState,string,string	proc recordRelay(hp: var HolepunchState; targetKey: string; relayKey: string)		290
+nim	cleanupExpired	cps/bittorrent/holepunch.html#cleanupExpired,HolepunchState	proc cleanupExpired(hp: var HolepunchState)		328
+nim	relaysFor	cps/bittorrent/holepunch.html#relaysFor.i,HolepunchState,string	iterator relaysFor(hp: HolepunchState; targetKey: string): string		361
+nimgrp	isbackedoff	cps/bittorrent/holepunch.html#isBackedOff-procs-all	proc		210

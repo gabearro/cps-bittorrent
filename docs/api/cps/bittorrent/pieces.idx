@@ -1,0 +1,62 @@
+nimTitle	pieces	cps/bittorrent/pieces.html	module cps/bittorrent/pieces		0
+nim	BlockSize	cps/bittorrent/pieces.html#BlockSize	const BlockSize		13
+nim	MaxBlockSize	cps/bittorrent/pieces.html#MaxBlockSize	const MaxBlockSize		14
+nim	blockIndex	cps/bittorrent/pieces.html#blockIndex,int	proc blockIndex(offset: int): int		16
+nim	psEmpty	cps/bittorrent/pieces.html#psEmpty	PieceState.psEmpty		21
+nim	psPartial	cps/bittorrent/pieces.html#psPartial	PieceState.psPartial		21
+nim	psComplete	cps/bittorrent/pieces.html#psComplete	PieceState.psComplete		21
+nim	psOptimistic	cps/bittorrent/pieces.html#psOptimistic	PieceState.psOptimistic		21
+nim	psVerified	cps/bittorrent/pieces.html#psVerified	PieceState.psVerified		21
+nim	psFailed	cps/bittorrent/pieces.html#psFailed	PieceState.psFailed		21
+nim	PieceState	cps/bittorrent/pieces.html#PieceState	enum PieceState		21
+nim	bsEmpty	cps/bittorrent/pieces.html#bsEmpty	BlockState.bsEmpty		29
+nim	bsRequested	cps/bittorrent/pieces.html#bsRequested	BlockState.bsRequested		29
+nim	bsReceived	cps/bittorrent/pieces.html#bsReceived	BlockState.bsReceived		29
+nim	BlockState	cps/bittorrent/pieces.html#BlockState	enum BlockState		29
+nim	BlockInfo	cps/bittorrent/pieces.html#BlockInfo	object BlockInfo		34
+nim	BlockAgreement	cps/bittorrent/pieces.html#BlockAgreement	object BlockAgreement		39
+nim	PieceConsensus	cps/bittorrent/pieces.html#PieceConsensus	object PieceConsensus		43
+nim	PieceData	cps/bittorrent/pieces.html#PieceData	object PieceData		47
+nim	BlockKey	cps/bittorrent/pieces.html#BlockKey	tuple BlockKey		57
+nim	BlockRaceInfo	cps/bittorrent/pieces.html#BlockRaceInfo	object BlockRaceInfo		59
+nim	BlockRaceTracker	cps/bittorrent/pieces.html#BlockRaceTracker	object BlockRaceTracker		63
+nim	PieceManager	cps/bittorrent/pieces.html#PieceManager	type PieceManager		67
+nim	CompletedStates	cps/bittorrent/pieces.html#CompletedStates	const CompletedStates		79
+nim	newPieceManager	cps/bittorrent/pieces.html#newPieceManager,TorrentInfo,int,bool	proc newPieceManager(info: TorrentInfo; maxRacers: int = 3;\n                trackAgreement: bool = false): PieceManager		84
+nim	isComplete	cps/bittorrent/pieces.html#isComplete,PieceManager	proc isComplete(pm: PieceManager): bool		117
+nim	progress	cps/bittorrent/pieces.html#progress,PieceManager	proc progress(pm: PieceManager): float		121
+nim	bytesRemaining	cps/bittorrent/pieces.html#bytesRemaining,PieceManager	proc bytesRemaining(pm: PieceManager): int64		126
+nim	initConsensus	cps/bittorrent/pieces.html#initConsensus,PieceData	proc initConsensus(piece: var PieceData)		130
+nim	recordBlockCrc	cps/bittorrent/pieces.html#recordBlockCrc,PieceData,int,openArray[byte]	proc recordBlockCrc(piece: var PieceData; blockIdx: int; data: openArray[byte])		137
+nim	blockNeedsAgreement	cps/bittorrent/pieces.html#blockNeedsAgreement,PieceData,int	proc blockNeedsAgreement(piece: PieceData; bi: int): bool		142
+nim	isBlockEligibleForRacing	cps/bittorrent/pieces.html#isBlockEligibleForRacing,PieceManager,int,int,string	proc isBlockEligibleForRacing(pm: PieceManager; pieceIdx: int; offset: int;\n                         peerKey: string): bool		148
+nim	receiveBlock	cps/bittorrent/pieces.html#receiveBlock,PieceManager,int,int,string	proc receiveBlock(pm: PieceManager; pieceIdx: int; offset: int; data: string): bool		160
+nim	failPiece	cps/bittorrent/pieces.html#failPiece,PieceManager,int	proc failPiece(pm: PieceManager; pieceIdx: int)		203
+nim	applyVerification	cps/bittorrent/pieces.html#applyVerification,PieceManager,int,bool	proc applyVerification(pm: PieceManager; pieceIdx: int; hashMatch: bool)		220
+nim	verifyPiece	cps/bittorrent/pieces.html#verifyPiece,PieceManager,int	proc verifyPiece(pm: PieceManager; pieceIdx: int): bool		229
+nim	resetPiece	cps/bittorrent/pieces.html#resetPiece,PieceManager,int	proc resetPiece(pm: PieceManager; pieceIdx: int)		244
+nim	failAndResetPiece	cps/bittorrent/pieces.html#failAndResetPiece,PieceManager,int	proc failAndResetPiece(pm: PieceManager; pieceIdx: int)		260
+nim	getNeededBlocks	cps/bittorrent/pieces.html#getNeededBlocks,PieceManager,int,int	proc getNeededBlocks(pm: PieceManager; pieceIdx: int; maxBlocks: int = 5): seq[\n    tuple[offset: int, length: int]]		280
+nim	markBlockRequested	cps/bittorrent/pieces.html#markBlockRequested,PieceManager,int,int	proc markBlockRequested(pm: PieceManager; pieceIdx: int; offset: int)		295
+nim	cancelBlockRequest	cps/bittorrent/pieces.html#cancelBlockRequest,PieceManager,int,int	proc cancelBlockRequest(pm: PieceManager; pieceIdx: int; offset: int)		302
+nim	cancelPeerRequests	cps/bittorrent/pieces.html#cancelPeerRequests,PieceManager,seq[tuple[int,int]]	proc cancelPeerRequests(pm: PieceManager;\n                   requests: seq[tuple[pieceIdx: int, offset: int]])		315
+nim	selectPiece	cps/bittorrent/pieces.html#selectPiece,PieceManager,seq[byte],seq[int],HashSet[int]	proc selectPiece(pm: PieceManager; peerBitfield: seq[byte]; availability: seq[int];\n            exclude: HashSet[int] = initHashSet[int]()): int		327
+nim	selectPieceSimple	cps/bittorrent/pieces.html#selectPieceSimple,PieceManager,seq[byte]	proc selectPieceSimple(pm: PieceManager; peerBitfield: seq[byte]): int		381
+nim	piecesRemaining	cps/bittorrent/pieces.html#piecesRemaining,PieceManager	proc piecesRemaining(pm: PieceManager): int		397
+nim	isStuckPartial	cps/bittorrent/pieces.html#isStuckPartial,PieceData,float	proc isStuckPartial(piece: PieceData; timeoutSec: float): bool		401
+nim	inEndgame	cps/bittorrent/pieces.html#inEndgame,PieceManager	proc inEndgame(pm: PieceManager): bool		417
+nim	getEndgameBlocks	cps/bittorrent/pieces.html#getEndgameBlocks,PieceManager,seq[byte],int	proc getEndgameBlocks(pm: PieceManager; peerBitfield: seq[byte]; maxBlocks: int = 5): seq[\n    tuple[pieceIdx: int, offset: int, length: int]]		430
+nim	getPieceData	cps/bittorrent/pieces.html#getPieceData,PieceManager,int	proc getPieceData(pm: PieceManager; pieceIdx: int): string		454
+nim	generateBitfield	cps/bittorrent/pieces.html#generateBitfield,PieceManager	proc generateBitfield(pm: PieceManager): seq[byte]		464
+nim	registerRacer	cps/bittorrent/pieces.html#registerRacer,PieceManager,int,int,string	proc registerRacer(pm: PieceManager; pieceIdx: int; offset: int; peerKey: string)		475
+nim	unregisterRacer	cps/bittorrent/pieces.html#unregisterRacer,PieceManager,int,int,string	proc unregisterRacer(pm: PieceManager; pieceIdx: int; offset: int; peerKey: string)		489
+nim	getRacingPeers	cps/bittorrent/pieces.html#getRacingPeers,PieceManager,int,int	proc getRacingPeers(pm: PieceManager; pieceIdx: int; offset: int): seq[string]		504
+nim	clearRaceEntry	cps/bittorrent/pieces.html#clearRaceEntry,PieceManager,int,int	proc clearRaceEntry(pm: PieceManager; pieceIdx: int; offset: int)		511
+nim	blockLength	cps/bittorrent/pieces.html#blockLength,PieceManager,int,int	proc blockLength(pm: PieceManager; pieceIdx: int; offset: int): int		516
+nim	getRaceableBlocks	cps/bittorrent/pieces.html#getRaceableBlocks,PieceManager,int,string,seq[byte],int,bool	proc getRaceableBlocks(pm: PieceManager; pieceIdx: int; peerKey: string;\n                  peerBitfield: seq[byte]; maxBlocks: int = 5;\n                  includeVerifiable: bool = false): seq[\n    tuple[pieceIdx: int, offset: int, length: int]]		524
+nim	getCrossRaceBlocks	cps/bittorrent/pieces.html#getCrossRaceBlocks,PieceManager,string,seq[byte],int,seq[int]	proc getCrossRaceBlocks(pm: PieceManager; peerKey: string; peerBitfield: seq[byte];\n                   maxBlocks: int = 16; excludePieces: seq[int] = @[]): seq[\n    tuple[pieceIdx: int, offset: int, length: int]]		546
+nim	clearPieceRaceEntries	cps/bittorrent/pieces.html#clearPieceRaceEntries,PieceManager,int	proc clearPieceRaceEntries(pm: PieceManager; pieceIdx: int)		571
+nim	checkBlockAgreement	cps/bittorrent/pieces.html#checkBlockAgreement,PieceManager,int,int,openArray[byte]	proc checkBlockAgreement(pm: PieceManager; pieceIdx: int; offset: int;\n                    data: openArray[byte]): bool		583
+nim	meetsOptimisticThreshold	cps/bittorrent/pieces.html#meetsOptimisticThreshold,PieceManager,int,int,int	proc meetsOptimisticThreshold(pm: PieceManager; pieceIdx: int;\n                         minAgreePeers: int = 2; minAgreeBlocks: int = 3): bool		604
+nim	markOptimistic	cps/bittorrent/pieces.html#markOptimistic,PieceManager,int	proc markOptimistic(pm: PieceManager; pieceIdx: int)		624
+nim	applyOptimisticVerification	cps/bittorrent/pieces.html#applyOptimisticVerification,PieceManager,int,bool	proc applyOptimisticVerification(pm: PieceManager; pieceIdx: int; hashMatch: bool)		633

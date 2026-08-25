@@ -1,0 +1,66 @@
+nimTitle	peer	cps/bittorrent/peer.html	module cps/bittorrent/peer		0
+nim	MaxPendingRequests	cps/bittorrent/peer.html#MaxPendingRequests	const MaxPendingRequests		24
+nim	KeepAliveIntervalMs	cps/bittorrent/peer.html#KeepAliveIntervalMs	const KeepAliveIntervalMs		25
+nim	PeerTimeoutMs	cps/bittorrent/peer.html#PeerTimeoutMs	const PeerTimeoutMs		26
+nim	MaxMessageSize	cps/bittorrent/peer.html#MaxMessageSize	const MaxMessageSize		27
+nim	UtpFallbackTimeoutMs	cps/bittorrent/peer.html#UtpFallbackTimeoutMs	const UtpFallbackTimeoutMs		28
+nim	UtpPreferredTimeoutMs	cps/bittorrent/peer.html#UtpPreferredTimeoutMs	const UtpPreferredTimeoutMs		29
+nim	formatPeerAddr	cps/bittorrent/peer.html#formatPeerAddr,string,uint16	proc formatPeerAddr(ip: string; port: uint16): string		34
+nim	ptTcp	cps/bittorrent/peer.html#ptTcp	TransportKind.ptTcp		43
+nim	ptUtp	cps/bittorrent/peer.html#ptUtp	TransportKind.ptUtp		43
+nim	TransportKind	cps/bittorrent/peer.html#TransportKind	enum TransportKind		43
+nim	srcUnknown	cps/bittorrent/peer.html#srcUnknown	PeerSource.srcUnknown		47
+nim	srcTracker	cps/bittorrent/peer.html#srcTracker	PeerSource.srcTracker		47
+nim	srcDht	cps/bittorrent/peer.html#srcDht	PeerSource.srcDht		47
+nim	srcPex	cps/bittorrent/peer.html#srcPex	PeerSource.srcPex		47
+nim	srcLsd	cps/bittorrent/peer.html#srcLsd	PeerSource.srcLsd		47
+nim	srcIncoming	cps/bittorrent/peer.html#srcIncoming	PeerSource.srcIncoming		47
+nim	srcHolepunch	cps/bittorrent/peer.html#srcHolepunch	PeerSource.srcHolepunch		47
+nim	PeerSource	cps/bittorrent/peer.html#PeerSource	enum PeerSource		47
+nim	psConnecting	cps/bittorrent/peer.html#psConnecting	PeerState.psConnecting		56
+nim	psHandshaking	cps/bittorrent/peer.html#psHandshaking	PeerState.psHandshaking		56
+nim	psActive	cps/bittorrent/peer.html#psActive	PeerState.psActive		56
+nim	psDisconnected	cps/bittorrent/peer.html#psDisconnected	PeerState.psDisconnected		56
+nim	PeerState	cps/bittorrent/peer.html#PeerState	enum PeerState		56
+nim	pekConnected	cps/bittorrent/peer.html#pekConnected	PeerEventKind.pekConnected		62
+nim	pekDisconnected	cps/bittorrent/peer.html#pekDisconnected	PeerEventKind.pekDisconnected		62
+nim	pekHandshake	cps/bittorrent/peer.html#pekHandshake	PeerEventKind.pekHandshake		62
+nim	pekChoke	cps/bittorrent/peer.html#pekChoke	PeerEventKind.pekChoke		62
+nim	pekUnchoke	cps/bittorrent/peer.html#pekUnchoke	PeerEventKind.pekUnchoke		62
+nim	pekInterested	cps/bittorrent/peer.html#pekInterested	PeerEventKind.pekInterested		62
+nim	pekNotInterested	cps/bittorrent/peer.html#pekNotInterested	PeerEventKind.pekNotInterested		62
+nim	pekHave	cps/bittorrent/peer.html#pekHave	PeerEventKind.pekHave		62
+nim	pekBitfield	cps/bittorrent/peer.html#pekBitfield	PeerEventKind.pekBitfield		62
+nim	pekBlock	cps/bittorrent/peer.html#pekBlock	PeerEventKind.pekBlock		62
+nim	pekRequest	cps/bittorrent/peer.html#pekRequest	PeerEventKind.pekRequest		62
+nim	pekCancel	cps/bittorrent/peer.html#pekCancel	PeerEventKind.pekCancel		62
+nim	pekError	cps/bittorrent/peer.html#pekError	PeerEventKind.pekError		62
+nim	pekExtHandshake	cps/bittorrent/peer.html#pekExtHandshake	PeerEventKind.pekExtHandshake		62
+nim	pekExtMessage	cps/bittorrent/peer.html#pekExtMessage	PeerEventKind.pekExtMessage		62
+nim	pekHaveAll	cps/bittorrent/peer.html#pekHaveAll	PeerEventKind.pekHaveAll		62
+nim	pekHaveNone	cps/bittorrent/peer.html#pekHaveNone	PeerEventKind.pekHaveNone		62
+nim	pekSuggestPiece	cps/bittorrent/peer.html#pekSuggestPiece	PeerEventKind.pekSuggestPiece		62
+nim	pekRejectRequest	cps/bittorrent/peer.html#pekRejectRequest	PeerEventKind.pekRejectRequest		62
+nim	pekAllowedFast	cps/bittorrent/peer.html#pekAllowedFast	PeerEventKind.pekAllowedFast		62
+nim	pekPort	cps/bittorrent/peer.html#pekPort	PeerEventKind.pekPort		62
+nim	PeerEventKind	cps/bittorrent/peer.html#PeerEventKind	enum PeerEventKind		62
+nim	PeerEvent	cps/bittorrent/peer.html#PeerEvent	object PeerEvent		85
+nim	PeerConn	cps/bittorrent/peer.html#PeerConn	type PeerConn		120
+nim	newPeerConn	cps/bittorrent/peer.html#newPeerConn,string,uint16,array[,byte],array[,byte],AsyncChannel[PeerEvent],ExtensionRegistry	proc newPeerConn(ip: string; port: uint16; infoHash: array[20, byte];\n            peerId: array[20, byte]; events: AsyncChannel[PeerEvent];\n            localExtensions: ExtensionRegistry = newExtensionRegistry()): PeerConn		189
+nim	closeStream	cps/bittorrent/peer.html#closeStream,PeerConn	proc closeStream(peer: PeerConn)		215
+nim	run	cps/bittorrent/peer.html#run,PeerConn	proc run(peer: PeerConn): CpsVoidFuture		2410
+nim	runIncoming	cps/bittorrent/peer.html#runIncoming,PeerConn,AsyncStream	proc runIncoming(peer: PeerConn; stream: AsyncStream): CpsVoidFuture		2410
+nim	sendChoke	cps/bittorrent/peer.html#sendChoke,PeerConn	proc sendChoke(peer: PeerConn): CpsVoidFuture		2410
+nim	sendUnchoke	cps/bittorrent/peer.html#sendUnchoke,PeerConn	proc sendUnchoke(peer: PeerConn): CpsVoidFuture		2410
+nim	sendInterested	cps/bittorrent/peer.html#sendInterested,PeerConn	proc sendInterested(peer: PeerConn): CpsVoidFuture		2410
+nim	sendNotInterested	cps/bittorrent/peer.html#sendNotInterested,PeerConn	proc sendNotInterested(peer: PeerConn): CpsVoidFuture		2410
+nim	sendHave	cps/bittorrent/peer.html#sendHave,PeerConn,uint32	proc sendHave(peer: PeerConn; index: uint32): CpsVoidFuture		2410
+nim	sendBitfield	cps/bittorrent/peer.html#sendBitfield,PeerConn,seq[byte]	proc sendBitfield(peer: PeerConn; bf: seq[byte]): CpsVoidFuture		2410
+nim	sendRequest	cps/bittorrent/peer.html#sendRequest,PeerConn,uint32,uint32,uint32	proc sendRequest(peer: PeerConn; index, begin, length: uint32): CpsVoidFuture		2410
+nim	sendCancel	cps/bittorrent/peer.html#sendCancel,PeerConn,uint32,uint32,uint32	proc sendCancel(peer: PeerConn; index, begin, length: uint32): CpsVoidFuture		2410
+nim	sendPieceBlock	cps/bittorrent/peer.html#sendPieceBlock,PeerConn,uint32,uint32,string	proc sendPieceBlock(peer: PeerConn; index, begin: uint32; data: string): CpsVoidFuture		2410
+nim	sendExtended	cps/bittorrent/peer.html#sendExtended,PeerConn,string,string	proc sendExtended(peer: PeerConn; extName: string; payload: string): CpsVoidFuture		2410
+nim	sendRejectRequest	cps/bittorrent/peer.html#sendRejectRequest,PeerConn,uint32,uint32,uint32	proc sendRejectRequest(peer: PeerConn; index, begin, length: uint32): CpsVoidFuture		2410
+nim	sendSuggestPiece	cps/bittorrent/peer.html#sendSuggestPiece,PeerConn,uint32	proc sendSuggestPiece(peer: PeerConn; index: uint32): CpsVoidFuture		2410
+nim	sendAllowedFast	cps/bittorrent/peer.html#sendAllowedFast,PeerConn,uint32	proc sendAllowedFast(peer: PeerConn; index: uint32): CpsVoidFuture		2410
+nim	sendPort	cps/bittorrent/peer.html#sendPort,PeerConn,uint16	proc sendPort(peer: PeerConn; port: uint16): CpsVoidFuture		2410
