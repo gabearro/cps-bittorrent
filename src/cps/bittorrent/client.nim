@@ -281,6 +281,7 @@ type
       changedPieceState*: PieceState
 
 proc defaultConfig*(): ClientConfig =
+  ## Return the default config.
   ClientConfig(
     downloadDir: getCurrentDir(),
     listenPort: 6881,
@@ -310,6 +311,7 @@ proc initClientCommon(client: TorrentClient, config: ClientConfig)
 
 proc newTorrentClient*(metainfo: TorrentMetainfo,
                        config: ClientConfig = defaultConfig()): TorrentClient =
+  ## Create a new torrent client.
   let pm = newPieceManager(metainfo.info, config.maxRacersPerBlock,
                            config.enableOptimisticVerification)
   # Set up extension registry

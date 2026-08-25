@@ -83,6 +83,7 @@ template validPieceIdx(pm: PieceManager, idx: int): bool =
 
 proc newPieceManager*(info: TorrentInfo, maxRacers: int = 3,
                       trackAgreement: bool = false): PieceManager =
+  ## Create a new piece manager.
   let numPieces = info.pieceCount
   result = PieceManager(
     info: info,
@@ -114,13 +115,16 @@ proc newPieceManager*(info: TorrentInfo, maxRacers: int = 3,
     )
 
 proc isComplete*(pm: PieceManager): bool =
+  ## Return whether every torrent piece is complete.
   pm.verifiedCount + pm.optimisticCount == pm.totalPieces
 
 proc progress*(pm: PieceManager): float =
+  ## Return completed piece bytes as a fraction of the torrent size.
   if pm.totalPieces == 0: 1.0
   else: (pm.verifiedCount + pm.optimisticCount).float / pm.totalPieces.float
 
 proc bytesRemaining*(pm: PieceManager): int64 =
+  ## Return the number of piece bytes still missing.
   pm.info.totalLength - pm.downloaded
 
 proc initConsensus*(piece: var PieceData) =

@@ -14,10 +14,15 @@ const
 type
   PexFlags* = distinct uint8
 
+## Combine two flag sets.
 proc `or`*(a, b: PexFlags): PexFlags {.borrow.}
+## Intersect two flag sets.
 proc `and`*(a, b: PexFlags): PexFlags {.borrow.}
+## Invert the current flag set.
 proc `not`*(a: PexFlags): PexFlags {.borrow.}
+## Compare two values for equality.
 proc `==`*(a, b: PexFlags): bool {.borrow.}
+## Return the human-readable representation of this value.
 proc `$`*(f: PexFlags): string = $uint8(f)
 
 const

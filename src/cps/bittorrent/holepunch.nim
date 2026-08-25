@@ -193,9 +193,11 @@ type
     successes*: int
     lastError*: string
 
+## Remove all hole-punch state for the target endpoint.
 proc removeTarget*(hp: var HolepunchState, targetKey: string)  # forward decl
 
 proc initHolepunchState*(): HolepunchState =
+  ## Initialize holepunch state.
   HolepunchState(
     relayByTarget: initTable[string, HashSet[string]](),
     targetsByRelay: initTable[string, HashSet[string]](),
@@ -206,27 +208,34 @@ proc initHolepunchState*(): HolepunchState =
   )
 
 proc isBackedOff*(hp: HolepunchState, key: string): bool =
+  ## Return whether hole punching is temporarily backed off.
   if key in hp.backoff:
     return hp.backoff[key] > epochTime()
 
 proc isBackedOff*(hp: HolepunchState, key: string, nowTs: float): bool =
+  ## Return whether hole punching is temporarily backed off.
   if key in hp.backoff:
     return hp.backoff[key] > nowTs
 
 proc isInFlight*(hp: HolepunchState, key: string): bool =
+  ## Return whether a hole-punch attempt is in flight.
   key in hp.inFlight
 
 proc isExpected*(hp: HolepunchState, key: string): bool =
+  ## Return whether a hole-punch response is expected.
   if key in hp.expected:
     return epochTime() < hp.expected[key]
 
 proc clearInFlight*(hp: var HolepunchState, key: string) =
+  ## Remove an in-flight hole-punch attempt.
   hp.inFlight.excl(key)
 
 proc clearExpected*(hp: var HolepunchState, key: string) =
+  ## Remove an expected hole-punch response.
   hp.expected.del(key)
 
 proc markInFlight*(hp: var HolepunchState, key: string) =
+  ## Mark in flight in the current protocol state.
   hp.inFlight.incl(key)
   hp.expected[key] = epochTime() + DefaultExpectedSec
 

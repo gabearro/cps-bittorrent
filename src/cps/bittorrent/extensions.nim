@@ -33,6 +33,7 @@ type
     uploadOnly*: bool   ## BEP 21: remote is a partial seed (upload only)
 
 proc newExtensionRegistry*(): ExtensionRegistry =
+  ## Create a new extension registry.
   ExtensionRegistry(
     localIds: initTable[string, ExtensionId](),
     remoteIds: initTable[string, ExtensionId](),

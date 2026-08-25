@@ -22,6 +22,7 @@ type
   StorageError* = object of CatchableError
 
 proc newStorageManager*(info: TorrentInfo, baseDir: string): StorageManager =
+  ## Create a new storage manager.
   result = StorageManager(
     baseDir: baseDir,
     info: info,

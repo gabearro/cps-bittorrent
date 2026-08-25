@@ -88,6 +88,7 @@ const
 
 proc defaultAnnounceParams*(info: TorrentInfo, peerId: array[20, byte],
                             listenPort: uint16): AnnounceParams =
+  ## Return the default announce params.
   AnnounceParams(
     infoHash: info.infoHash,
     peerId: peerId,
@@ -113,6 +114,7 @@ proc buildHttpGetRequest(requestTarget, host: string): string =
     "\r\nConnection: close\r\n\r\n"
 
 proc buildAnnounceUrl*(baseUrl: string, params: AnnounceParams): string =
+  ## Build announce url from the supplied state.
   var url = baseUrl
   if '?' in url: url.add('&')
   else: url.add('?')
@@ -223,6 +225,7 @@ proc parseDictPeers*(list: BencodeValue): seq[TrackerPeer] =
 # ============================================================
 
 proc parseTrackerResponse*(data: string): TrackerResponse =
+  ## Parse tracker response from its encoded representation.
   let root = decode(data)
   if root.kind != bkDict:
     raise newException(TrackerError, "tracker response not a dictionary")
@@ -269,6 +272,7 @@ proc parseTrackerResponse*(data: string): TrackerResponse =
     result.peers.add(parseCompactPeers6(peers6.strVal))
 
 proc parseScrapeResponse*(data: string, infoHash: array[20, byte]): ScrapeInfo =
+  ## Parse scrape response from its encoded representation.
   let root = decode(data)
   if root.kind != bkDict:
     raise newException(TrackerError, "scrape response not a dictionary")
@@ -405,6 +409,7 @@ proc udpTrackerConnect(sock: UdpSocket, ip: string, port: int,
 # ============================================================
 
 proc httpAnnounce*(announceUrl: string, params: AnnounceParams): CpsFuture[TrackerResponse] {.cps, nosinks.} =
+  ## Announce to an HTTP tracker.
   let fullUrl: string = buildAnnounceUrl(announceUrl, params)
   let urlParts = parseTrackerUrl(fullUrl, 80)
   let host: string = urlParts.host
@@ -438,6 +443,7 @@ proc httpAnnounce*(announceUrl: string, params: AnnounceParams): CpsFuture[Track
   return parseTrackerResponse(resp.body)
 
 proc httpsAnnounce*(announceUrl: string, params: AnnounceParams): CpsFuture[TrackerResponse] {.cps, nosinks.} =
+  ## Announce to an HTTPS tracker.
   let fullUrl: string = buildAnnounceUrl(announceUrl, params)
   let urlParts = parseTrackerUrl(fullUrl, 443)
   let host: string = urlParts.host
@@ -486,6 +492,7 @@ proc httpsAnnounce*(announceUrl: string, params: AnnounceParams): CpsFuture[Trac
 # ============================================================
 
 proc udpAnnounce*(announceUrl: string, params: AnnounceParams): CpsFuture[TrackerResponse] {.cps, nosinks.} =
+  ## Announce to a UDP tracker.
   let parsed: Uri = parseUri(announceUrl)
   let host: string = parsed.hostname
   let port: uint16 = if parsed.port.len > 0: parseInt(parsed.port).uint16 else: 6969'u16
@@ -583,6 +590,7 @@ proc udpAnnounce*(announceUrl: string, params: AnnounceParams): CpsFuture[Tracke
 # ============================================================
 
 proc httpScrape*(announceUrl: string, infoHash: array[20, byte]): CpsFuture[ScrapeInfo] {.cps, nosinks.} =
+  ## Scrape torrent statistics from an HTTP tracker.
   let url: string = buildScrapeUrl(announceUrl, infoHash)
   let urlParts = parseTrackerUrl(url, 80)
   let host: string = urlParts.host
@@ -607,6 +615,7 @@ proc httpScrape*(announceUrl: string, infoHash: array[20, byte]): CpsFuture[Scra
   return parseScrapeResponse(resp.body, infoHash)
 
 proc httpsScrape*(announceUrl: string, infoHash: array[20, byte]): CpsFuture[ScrapeInfo] {.cps, nosinks.} =
+  ## Scrape torrent statistics from an HTTPS tracker.
   let url: string = buildScrapeUrl(announceUrl, infoHash)
   let urlParts = parseTrackerUrl(url, 443)
   let host: string = urlParts.host

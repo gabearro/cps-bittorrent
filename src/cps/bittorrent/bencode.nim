@@ -33,18 +33,23 @@ type
 
 # Constructors
 proc bInt*(v: int64): BencodeValue =
+  ## Construct a bencoded integer value.
   BencodeValue(kind: bkInt, intVal: v)
 
 proc bStr*(v: string): BencodeValue =
+  ## Construct a bencoded byte-string value.
   BencodeValue(kind: bkStr, strVal: v)
 
 proc bList*(items: varargs[BencodeValue]): BencodeValue =
+  ## Construct a bencoded list value.
   BencodeValue(kind: bkList, listVal: @items)
 
 proc bDict*(): BencodeValue =
+  ## Construct a bencoded dictionary value.
   BencodeValue(kind: bkDict, dictVal: initOrderedTable[string, BencodeValue]())
 
 proc bDict*(t: Table[string, BencodeValue]): BencodeValue =
+  ## Construct a bencoded dictionary value.
   var ot = initOrderedTable[string, BencodeValue]()
   for k, v in t:
     ot[k] = v
@@ -56,18 +61,22 @@ iterator dictKeys*(d: BencodeValue): string =
   for k in d.dictVal.keys:
     yield k
 
+## Replace the value selected by the supplied index or key.
 proc `[]=`*(d: BencodeValue, key: string, val: BencodeValue) =
   assert d.kind == bkDict
   d.dictVal[key] = val
 
 proc `[]`*(d: BencodeValue, key: string): BencodeValue =
+  ## Return the value selected by the supplied index or key.
   assert d.kind == bkDict
   d.dictVal[key]
 
 proc contains*(d: BencodeValue, key: string): bool =
+  ## Return whether the bencoded dictionary contains the key.
   d.kind == bkDict and key in d.dictVal
 
 proc getOrDefault*(d: BencodeValue, key: string): BencodeValue =
+  ## Return the dictionary value or nil when the key is absent.
   if d.kind == bkDict:
     d.dictVal.getOrDefault(key)
   else:
@@ -123,6 +132,7 @@ proc optStrList*(d: BencodeValue, key: string): seq[string] =
   else: discard
 
 proc len*(v: BencodeValue): int =
+  ## Return the number of values in this bencode.
   case v.kind
   of bkStr: v.strVal.len
   of bkList: v.listVal.len
@@ -130,6 +140,7 @@ proc len*(v: BencodeValue): int =
   of bkInt: 0
 
 proc `$`*(v: BencodeValue): string =
+  ## Return the human-readable representation of this value.
   case v.kind
   of bkInt: "i(" & $v.intVal & ")"
   of bkStr:
@@ -183,6 +194,7 @@ proc encodeInto*(v: BencodeValue, result: var string) =
     result.add('e')
 
 proc encode*(v: BencodeValue): string =
+  ## Encode bencode into its wire representation.
   encodeInto(v, result)
 
 # Decoder
@@ -302,6 +314,7 @@ proc initParser(data: string, startPos: int = 0): BencodeParser =
     )
 
 proc decode*(data: string): BencodeValue =
+  ## Decode bencode from its wire representation.
   var p = initParser(data)
   result = parseValue(p)
   if p.pos != p.len:

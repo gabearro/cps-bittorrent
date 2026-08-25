@@ -111,6 +111,7 @@ proc seqNrAfter*(a, b: uint16): bool {.inline.} =
   cast[int16](a - b) > 0
 
 proc newUtpSocket*(connId: uint16): UtpSocket =
+  ## Create a new uTP socket.
   UtpSocket(
     state: usIdle,
     connectionId: connId,

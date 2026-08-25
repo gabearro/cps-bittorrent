@@ -60,6 +60,7 @@ proc utpStreamClose(s: AsyncStream)
 const utpDebug* {.booldefine.} = false
 
 proc utpLog*(msg: string) {.inline.} =
+  ## Emit a diagnostic message for the uTP connection.
   when utpDebug:
     echo "[uTP] ", msg
 
@@ -103,6 +104,7 @@ proc extractAddr(srcAddr: Sockaddr_storage, addrLen: SockLen): (string, int) =
   result = (normalizeIp(host), parseInt(portStr))
 
 proc newUtpStream*(mgr: UtpManager, sock: UtpSocket, ip: string, port: int): UtpStream =
+  ## Create a new uTP stream.
   result = UtpStream(
     manager: mgr,
     sock: sock,
@@ -381,6 +383,7 @@ proc dispatchPacket(mgr: UtpManager, data: string, srcIp: string, srcPort: int) 
 # ============================================================
 
 proc newUtpManager*(listenPort: int = 0, domain: Domain = AF_INET): UtpManager =
+  ## Create a new uTP manager.
   result = UtpManager(
     udpSock: newUdpSocket(domain),
     domain: domain,
@@ -453,6 +456,7 @@ proc start*(mgr: UtpManager) =
   loop.registerTimer(500, checkTimeouts)
 
 proc close*(mgr: UtpManager) =
+  ## Close uTP stream and release its owned resources.
   if mgr.closed:
     return
   mgr.closed = true
@@ -473,6 +477,7 @@ proc close*(mgr: UtpManager) =
   mgr.udpSock.close()
 
 proc connectionCount*(mgr: UtpManager): int =
+  ## Return the number of active uTP connections.
   mgr.connections.len
 
 # ============================================================

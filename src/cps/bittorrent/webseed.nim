@@ -46,6 +46,7 @@ type
     closed*: bool
 
 proc newWebSeed*(url: string): WebSeed =
+  ## Create a new web seed.
   WebSeed(url: url, state: wssIdle)
 
 # ------------------------------------------------------------------

@@ -81,20 +81,24 @@ type
 # Node ID operations
 
 proc xorDistance*(a, b: NodeId): NodeId =
+  ## Return the XOR distance between two DHT node IDs.
   for i in 0 ..< NodeIdLen:
     result[i] = a[i] xor b[i]
 
 proc `<`*(a, b: NodeId): bool =
+  ## Compare two values using their protocol ordering.
   for i in 0 ..< NodeIdLen:
     if a[i] < b[i]: return true
     if a[i] > b[i]: return false
   return false
 
+## Compare two values for equality.
 proc `==`*(a, b: NodeId): bool =
   for i in 0 ..< NodeIdLen:
     if a[i] != b[i]: return false
   return true
 
+## Compare two values using their inclusive protocol ordering.
 proc `<=`*(a, b: NodeId): bool =
   for i in 0 ..< NodeIdLen:
     if a[i] < b[i]: return true
@@ -102,6 +106,7 @@ proc `<=`*(a, b: NodeId): bool =
   return true  # Equal
 
 proc hash*(id: NodeId): Hash =
+  ## Hash a DHT node ID for use in keyed containers.
   var h: Hash = 0
   for b in id:
     h = h !& hash(b)
@@ -212,9 +217,11 @@ proc isValidSecureNodeId*(nodeId: NodeId, ip: string): bool =
   return true
 
 proc nodeIdToHex*(id: NodeId): string =
+  ## Encode a DHT node ID as hexadecimal text.
   bytesToHex(id)
 
 proc hexToNodeId*(s: string): NodeId =
+  ## Decode a hexadecimal DHT node ID.
   assert s.len == 40
   let bytes = hexToBytes(s)
   copyMem(addr result[0], unsafeAddr bytes[0], 20)
@@ -222,6 +229,7 @@ proc hexToNodeId*(s: string): NodeId =
 # Routing table operations
 
 proc newRoutingTable*(ownId: NodeId): RoutingTable =
+  ## Create a new routing table.
   var minId: NodeId
   var maxId: NodeId
   for i in 0 ..< NodeIdLen:
@@ -390,6 +398,7 @@ proc removeNode*(rt: var RoutingTable, id: NodeId) =
     inc i
 
 proc totalNodes*(rt: RoutingTable): int =
+  ## Return the total number of nodes in the routing table.
   for bucket in rt.buckets:
     result += bucket.nodes.len
 
@@ -497,17 +506,20 @@ proc encodeDhtError*(transId: string, code: int, msg: string): string =
 # Query builders
 
 proc encodePingQuery*(transId: string, ownId: NodeId): string =
+  ## Encode ping query into its wire representation.
   var args = initTable[string, BencodeValue]()
   args["id"] = bStr(nodeIdToStr(ownId))
   return encodeDhtQuery(transId, "ping", args)
 
 proc encodeFindNodeQuery*(transId: string, ownId: NodeId, target: NodeId): string =
+  ## Encode find node query into its wire representation.
   var args = initTable[string, BencodeValue]()
   args["id"] = bStr(nodeIdToStr(ownId))
   args["target"] = bStr(nodeIdToStr(target))
   return encodeDhtQuery(transId, "find_node", args)
 
 proc encodeGetPeersQuery*(transId: string, ownId: NodeId, infoHash: NodeId): string =
+  ## Encode get peers query into its wire representation.
   var args = initTable[string, BencodeValue]()
   args["id"] = bStr(nodeIdToStr(ownId))
   args["info_hash"] = bStr(nodeIdToStr(infoHash))
@@ -516,6 +528,7 @@ proc encodeGetPeersQuery*(transId: string, ownId: NodeId, infoHash: NodeId): str
 proc encodeAnnouncePeerQuery*(transId: string, ownId: NodeId,
                                infoHash: NodeId, port: uint16,
                                token: string, impliedPort: bool = false): string =
+  ## Encode announce peer query into its wire representation.
   var args = initTable[string, BencodeValue]()
   args["id"] = bStr(nodeIdToStr(ownId))
   args["info_hash"] = bStr(nodeIdToStr(infoHash))
@@ -557,12 +570,14 @@ proc encodeCompactPeerValue(ip: string, port: uint16): string =
   writeUint16BE(result, port)
 
 proc encodePingResponse*(transId: string, ownId: NodeId): string =
+  ## Encode ping response into its wire representation.
   var resp = initTable[string, BencodeValue]()
   resp["id"] = bStr(nodeIdToStr(ownId))
   return encodeDhtResponse(transId, resp)
 
 proc encodeFindNodeResponse*(transId: string, ownId: NodeId,
                               nodes: seq[CompactNodeInfo]): string =
+  ## Encode find node response into its wire representation.
   var resp = initTable[string, BencodeValue]()
   resp["id"] = bStr(nodeIdToStr(ownId))
   resp.addCompactNodeList(nodes)
@@ -572,6 +587,7 @@ proc encodeGetPeersResponse*(transId: string, ownId: NodeId,
                               token: string,
                               peers: seq[tuple[ip: string, port: uint16]] = @[],
                               nodes: seq[CompactNodeInfo] = @[]): string =
+  ## Encode get peers response into its wire representation.
   var resp = initTable[string, BencodeValue]()
   resp["id"] = bStr(nodeIdToStr(ownId))
   resp["token"] = bStr(token)
@@ -725,6 +741,7 @@ type
 
 proc addPeer*(store: var DhtPeerStore, infoHash: NodeId,
               ip: string, port: uint16) =
+  ## Record a peer endpoint for the info hash.
   if infoHash notin store.peers:
     store.peers[infoHash] = @[]
   # Check for duplicates
@@ -736,6 +753,7 @@ proc addPeer*(store: var DhtPeerStore, infoHash: NodeId,
     store.peers[infoHash].delete(0)
 
 proc getPeers*(store: DhtPeerStore, infoHash: NodeId): seq[tuple[ip: string, port: uint16]] =
+  ## Return known peer endpoints for the info hash.
   if infoHash in store.peers:
     for p in store.peers[infoHash]:
       result.add((p.ip, p.port))

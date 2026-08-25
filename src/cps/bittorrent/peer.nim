@@ -190,6 +190,7 @@ proc newPeerConn*(ip: string, port: uint16, infoHash: array[20, byte],
                   peerId: array[20, byte],
                   events: AsyncChannel[PeerEvent],
                   localExtensions: ExtensionRegistry = newExtensionRegistry()): PeerConn =
+  ## Create a new peer conn.
   PeerConn(
     ip: ip,
     port: port,
@@ -585,34 +586,43 @@ proc runIncoming*(peer: PeerConn, stream: AsyncStream): CpsVoidFuture {.cps.} =
 
 # Command helpers (send via command channel to be processed by write loop)
 proc sendChoke*(peer: PeerConn): CpsVoidFuture {.cps.} =
+  ## Send choke through the active transport.
   peer.amChoking = true
   await peer.commands.send(chokeMsg())
 
 proc sendUnchoke*(peer: PeerConn): CpsVoidFuture {.cps.} =
+  ## Send unchoke through the active transport.
   peer.amChoking = false
   await peer.commands.send(unchokeMsg())
 
 proc sendInterested*(peer: PeerConn): CpsVoidFuture {.cps.} =
+  ## Send interested through the active transport.
   peer.amInterested = true
   await peer.commands.send(interestedMsg())
 
 proc sendNotInterested*(peer: PeerConn): CpsVoidFuture {.cps.} =
+  ## Send not interested through the active transport.
   peer.amInterested = false
   await peer.commands.send(notInterestedMsg())
 
 proc sendHave*(peer: PeerConn, index: uint32): CpsVoidFuture {.cps.} =
+  ## Send have through the active transport.
   await peer.commands.send(haveMsg(index))
 
 proc sendBitfield*(peer: PeerConn, bf: seq[byte]): CpsVoidFuture {.cps.} =
+  ## Send bitfield through the active transport.
   await peer.commands.send(bitfieldMsg(bf))
 
 proc sendRequest*(peer: PeerConn, index, begin, length: uint32): CpsVoidFuture {.cps.} =
+  ## Send request through the active transport.
   await peer.commands.send(requestMsg(index, begin, length))
 
 proc sendCancel*(peer: PeerConn, index, begin, length: uint32): CpsVoidFuture {.cps.} =
+  ## Send cancel through the active transport.
   await peer.commands.send(cancelMsg(index, begin, length))
 
 proc sendPieceBlock*(peer: PeerConn, index, begin: uint32, data: string): CpsVoidFuture {.cps.} =
+  ## Send piece block through the active transport.
   await peer.commands.send(pieceMsg(index, begin, data))
 
 proc sendExtended*(peer: PeerConn, extName: string, payload: string): CpsVoidFuture {.cps.} =
@@ -622,13 +632,17 @@ proc sendExtended*(peer: PeerConn, extName: string, payload: string): CpsVoidFut
     await peer.commands.send(extendedMsg(remoteExtId, payload))
 
 proc sendRejectRequest*(peer: PeerConn, index, begin, length: uint32): CpsVoidFuture {.cps.} =
+  ## Send reject request through the active transport.
   await peer.commands.send(rejectRequestMsg(index, begin, length))
 
 proc sendSuggestPiece*(peer: PeerConn, index: uint32): CpsVoidFuture {.cps.} =
+  ## Send suggest piece through the active transport.
   await peer.commands.send(suggestPieceMsg(index))
 
 proc sendAllowedFast*(peer: PeerConn, index: uint32): CpsVoidFuture {.cps.} =
+  ## Send allowed fast through the active transport.
   await peer.commands.send(allowedFastMsg(index))
 
 proc sendPort*(peer: PeerConn, port: uint16): CpsVoidFuture {.cps.} =
+  ## Send port through the active transport.
   await peer.commands.send(portMsg(port))

@@ -117,9 +117,11 @@ proc newBandwidthLimiter*(uploadBps: int = 0, downloadBps: int = 0,
   initSpinLock(result.lock)
 
 proc isLimited*(limiter: BandwidthLimiter, dir: Direction): bool {.inline.} =
+  ## Return whether the rate limiter is currently constraining traffic.
   limiter.buckets[dir].rate > 0
 
 proc effectiveRate*(limiter: BandwidthLimiter, dir: Direction): float {.inline.} =
+  ## Return the rate limit currently available to consumers.
   limiter.buckets[dir].rate
 
 proc refund*(limiter: BandwidthLimiter, bytes: int, dir: Direction) {.inline.} =

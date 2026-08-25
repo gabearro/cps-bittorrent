@@ -28,6 +28,7 @@ type
     complete*: bool           ## All pieces received and verified
 
 proc newMetadataExchange*(infoHash: array[20, byte]): MetadataExchange =
+  ## Create a new metadata exchange.
   MetadataExchange(infoHash: infoHash)
 
 proc initFromSize*(me: MetadataExchange, size: int) =

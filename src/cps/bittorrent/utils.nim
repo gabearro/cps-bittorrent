@@ -44,6 +44,7 @@ const Crc32cTable*: array[256, uint32] = block:
   t
 
 proc crc32c*(data: openArray[byte]): uint32 =
+  ## Compute a CRC-32C checksum.
   result = 0xFFFFFFFF'u32
   for b in data:
     result = (result shr 8) xor Crc32cTable[(result xor uint32(b)) and 0xFF]
@@ -75,6 +76,7 @@ proc parseIpv4*(ip: string): array[4, byte] =
     result[idx] = byte(octet and 0xFF)
 
 proc ipv4ToString*(b: array[4, byte]): string =
+  ## Format an IPv4 address as dotted-decimal text.
   $b[0] & "." & $b[1] & "." & $b[2] & "." & $b[3]
 
 # ============================================================
@@ -233,6 +235,7 @@ proc encodeCompactPeers6*(peers: seq[CompactPeer]): string =
 # ============================================================
 
 proc hexDigitToInt*(c: char): int {.inline.} =
+  ## Decode one hexadecimal digit.
   case c
   of '0'..'9': ord(c) - ord('0')
   of 'a'..'f': ord(c) - ord('a') + 10
@@ -272,25 +275,30 @@ proc percentDecode*(s: string): string =
 # ============================================================
 
 proc writeUint32BE*(s: var string, v: uint32) =
+  ## Write a big-endian uint32 into the destination buffer.
   s.add(char((v shr 24) and 0xFF))
   s.add(char((v shr 16) and 0xFF))
   s.add(char((v shr 8) and 0xFF))
   s.add(char(v and 0xFF))
 
 proc readUint32BE*(data: string, offset: int): uint32 =
+  ## Read a big-endian uint32 from the source buffer.
   result = (uint32(data[offset].byte) shl 24) or
            (uint32(data[offset+1].byte) shl 16) or
            (uint32(data[offset+2].byte) shl 8) or
            uint32(data[offset+3].byte)
 
 proc readUint16BE*(data: string, offset: int): uint16 =
+  ## Read a big-endian uint16 from the source buffer.
   (uint16(data[offset].byte) shl 8) or uint16(data[offset+1].byte)
 
 proc writeUint16BE*(s: var string, v: uint16) =
+  ## Write a big-endian uint16 into the destination buffer.
   s.add(char((v shr 8) and 0xFF))
   s.add(char(v and 0xFF))
 
 proc writeUint64BE*(s: var string, v: uint64) =
+  ## Write a big-endian uint64 into the destination buffer.
   s.add(char((v shr 56) and 0xFF))
   s.add(char((v shr 48) and 0xFF))
   s.add(char((v shr 40) and 0xFF))
@@ -301,13 +309,16 @@ proc writeUint64BE*(s: var string, v: uint64) =
   s.add(char(v and 0xFF))
 
 proc readUint64BE*(data: string, offset: int): uint64 =
+  ## Read a big-endian uint64 from the source buffer.
   for i in 0 ..< 8:
     result = (result shl 8) or uint64(data[offset+i].byte)
 
 proc writeInt32BE*(s: var string, v: int32) =
+  ## Write a big-endian int32 into the destination buffer.
   writeUint32BE(s, cast[uint32](v))
 
 proc readInt32BE*(data: string, offset: int): int32 =
+  ## Read a big-endian int32 from the source buffer.
   cast[int32](readUint32BE(data, offset))
 
 # ============================================================

@@ -10,9 +10,11 @@ const
   FastExtensionBit* = 0x04'u8  ## Bit in reserved[7]
 
 proc supportsFastExtension*(reserved: array[8, byte]): bool =
+  ## Return whether the peer negotiated the Fast extension.
   (reserved[7] and FastExtensionBit) != 0
 
 proc setFastExtensionBit*(reserved: var array[8, byte]) =
+  ## Set fast extension bit on the current fast extension.
   reserved[7] = reserved[7] or FastExtensionBit
 
 proc generateAllowedFastSet*(infoHash: array[20, byte],

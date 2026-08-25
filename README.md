@@ -132,8 +132,12 @@ The finished macOS application is in
 
 ## Development
 
+Read the [BitTorrent developer guide](docs/development.md) before changing public
+APIs, ownership, protocol state, or execution behavior.
+
 ```sh
 nimble install -d -y
+nimble checkDocs
 nimble test
 ```
 

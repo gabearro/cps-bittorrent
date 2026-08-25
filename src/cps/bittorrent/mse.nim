@@ -38,6 +38,7 @@ type
     i, j: uint8
 
 proc initRc4*(key: openArray[byte]): Rc4State =
+  ## Initialize rc4.
   for idx in 0 .. 255:
     result.s[idx] = uint8(idx)
   var j: uint8 = 0
@@ -46,16 +47,19 @@ proc initRc4*(key: openArray[byte]): Rc4State =
     swap(result.s[idx], result.s[j])
 
 proc nextByte*(state: var Rc4State): byte {.inline.} =
+  ## Return the next byte from the MSE stream cipher.
   state.i += 1
   state.j += state.s[state.i]
   swap(state.s[state.i], state.s[state.j])
   result = state.s[(state.s[state.i] + state.s[state.j])]
 
 proc processInPlace*(state: var Rc4State, data: var string) =
+  ## Encrypt or decrypt a buffer in place with the MSE cipher.
   for idx in 0 ..< data.len:
     data[idx] = char(data[idx].byte xor state.nextByte())
 
 proc discardBytes*(state: var Rc4State, n: int) =
+  ## Advance the MSE cipher by discarding keystream bytes.
   for _ in 0 ..< n:
     discard state.nextByte()
 
@@ -238,6 +242,7 @@ proc scanStreamFor(stream: AsyncStream, pattern: string,
 # ============ DH Key Exchange ============
 
 proc dhGenerateKeyPair*(): tuple[privKey: seq[byte], pubKey: array[DhKeyLen, byte]] =
+  ## Generate an MSE Diffie-Hellman key pair.
   let bnP = BN_new()
   let bnG = BN_new()
   let bnX = BN_new()
@@ -264,6 +269,7 @@ proc dhGenerateKeyPair*(): tuple[privKey: seq[byte], pubKey: array[DhKeyLen, byt
     discard BN_bn2bin(bnY, addr result.pubKey[off])
 
 proc dhComputeSecret*(remotePub: openArray[byte], privKey: seq[byte]): array[DhKeyLen, byte] =
+  ## Compute the MSE Diffie-Hellman shared secret.
   let bnP = BN_new()
   let bnR = BN_new()
   let bnX = BN_new()
@@ -308,6 +314,7 @@ proc mseClose(stream: AsyncStream) =
   mse.inner.close()
 
 proc newMseStream*(inner: AsyncStream, enc, dec: Rc4State): MseStream =
+  ## Create a new mse stream.
   result = MseStream(inner: inner, enc: enc, dec: dec)
   result.readProc = mseRead
   result.writeProc = mseWrite

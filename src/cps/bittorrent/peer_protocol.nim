@@ -233,61 +233,82 @@ proc decodeMessage*(data: string): PeerMessage =
 
 # Bitfield helpers
 proc hasPiece*(bitfield: seq[byte], index: int): bool =
+  ## Return whether a complete peer piece is buffered.
   let byteIdx = index shr 3
   let mask = 1'u8 shl (7 - (index and 7))
   byteIdx < bitfield.len and (bitfield[byteIdx] and mask) != 0
 
 proc setPiece*(bitfield: var seq[byte], index: int) =
+  ## Set piece on the current peer protocol.
   let byteIdx = index shr 3
   if byteIdx < bitfield.len:
     bitfield[byteIdx] = bitfield[byteIdx] or (1'u8 shl (7 - (index and 7)))
 
 proc clearPiece*(bitfield: var seq[byte], index: int) =
+  ## Discard the currently decoded peer piece.
   let byteIdx = index shr 3
   if byteIdx < bitfield.len:
     bitfield[byteIdx] = bitfield[byteIdx] and not (1'u8 shl (7 - (index and 7)))
 
 proc newBitfield*(numPieces: int): seq[byte] =
+  ## Create a new bitfield.
   newSeq[byte]((numPieces + 7) shr 3)
 
 proc countPieces*(bitfield: seq[byte], total: int): int =
+  ## Return the number of pieces.
   countBitsSet(bitfield, total)
 
 # Convenience constructors
+## Build a BitTorrent choke peer message.
 proc chokeMsg*(): PeerMessage = PeerMessage(id: msgChoke)
+## Build a BitTorrent unchoke peer message.
 proc unchokeMsg*(): PeerMessage = PeerMessage(id: msgUnchoke)
+## Build a BitTorrent interested peer message.
 proc interestedMsg*(): PeerMessage = PeerMessage(id: msgInterested)
+## Build a BitTorrent not interested peer message.
 proc notInterestedMsg*(): PeerMessage = PeerMessage(id: msgNotInterested)
 
 proc haveMsg*(index: uint32): PeerMessage =
+  ## Build a BitTorrent have peer message.
   PeerMessage(id: msgHave, pieceIndex: index)
 
 proc bitfieldMsg*(bf: seq[byte]): PeerMessage =
+  ## Build a BitTorrent bitfield peer message.
   PeerMessage(id: msgBitfield, bitfield: bf)
 
 proc requestMsg*(index, begin, length: uint32): PeerMessage =
+  ## Build a BitTorrent request peer message.
   PeerMessage(id: msgRequest, reqIndex: index, reqBegin: begin, reqLength: length)
 
 proc cancelMsg*(index, begin, length: uint32): PeerMessage =
+  ## Build a BitTorrent cancel peer message.
   PeerMessage(id: msgCancel, reqIndex: index, reqBegin: begin, reqLength: length)
 
 proc pieceMsg*(index, begin: uint32, data: string): PeerMessage =
+  ## Build a BitTorrent piece peer message.
   PeerMessage(id: msgPiece, blockIndex: index, blockBegin: begin, blockData: data)
 
 proc suggestPieceMsg*(index: uint32): PeerMessage =
+  ## Build a BitTorrent suggest piece peer message.
   PeerMessage(id: msgSuggestPiece, fastPieceIndex: index)
 
+## Build a BitTorrent have all peer message.
 proc haveAllMsg*(): PeerMessage = PeerMessage(id: msgHaveAll)
+## Build a BitTorrent have none peer message.
 proc haveNoneMsg*(): PeerMessage = PeerMessage(id: msgHaveNone)
 
 proc rejectRequestMsg*(index, begin, length: uint32): PeerMessage =
+  ## Build a BitTorrent reject request peer message.
   PeerMessage(id: msgRejectRequest, reqIndex: index, reqBegin: begin, reqLength: length)
 
 proc allowedFastMsg*(index: uint32): PeerMessage =
+  ## Build a BitTorrent allowed fast peer message.
   PeerMessage(id: msgAllowedFast, fastPieceIndex: index)
 
 proc portMsg*(port: uint16): PeerMessage =
+  ## Build a BitTorrent port peer message.
   PeerMessage(id: msgPort, dhtPort: port)
 
 proc extendedMsg*(extId: uint8, payload: string): PeerMessage =
+  ## Build a BitTorrent extended peer message.
   PeerMessage(id: msgExtended, extId: extId, extPayload: payload)
