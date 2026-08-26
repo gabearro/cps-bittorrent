@@ -261,8 +261,8 @@
 </div>
 <div id="start-procs-all">
   <div id="start,UtpManager">
-  <dt><pre><span class="Keyword">proc</span> <a href="#start%2CUtpManager"><span class="Identifier">start</span></a><span class="Other">(</span><span class="Identifier">mgr</span><span class="Other">:</span> <a href="utp_stream.html#UtpManager"><span class="Identifier">UtpManager</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOSelectorsException</span><span class="Other">]</span><span class="Other">,</span>
-                              <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dt><pre><span class="Keyword">proc</span> <a href="#start%2CUtpManager"><span class="Identifier">start</span></a><span class="Other">(</span><span class="Identifier">mgr</span><span class="Other">:</span> <a href="utp_stream.html#UtpManager"><span class="Identifier">UtpManager</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+                              <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
     Start the uTP manager: receive packets and check timeouts.
@@ -329,7 +329,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-08-25 20:56:54 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-08-26 19:54:30 UTC</small>
       </div>
     </div>
   </div>

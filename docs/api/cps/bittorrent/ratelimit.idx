@@ -15,6 +15,6 @@ nim	newBandwidthLimiter	cps/bittorrent/ratelimit.html#newBandwidthLimiter,int,in
 nim	isLimited	cps/bittorrent/ratelimit.html#isLimited,BandwidthLimiter,Direction	proc isLimited(limiter: BandwidthLimiter; dir: Direction): bool		119
 nim	effectiveRate	cps/bittorrent/ratelimit.html#effectiveRate,BandwidthLimiter,Direction	proc effectiveRate(limiter: BandwidthLimiter; dir: Direction): float		123
 nim	refund	cps/bittorrent/ratelimit.html#refund,BandwidthLimiter,int,Direction	proc refund(limiter: BandwidthLimiter; bytes: int; dir: Direction)		127
-nim	waitForBudget	cps/bittorrent/ratelimit.html#waitForBudget,BandwidthLimiter,Direction	proc waitForBudget(limiter: BandwidthLimiter; dir: Direction): CpsVoidFuture		2410
-nim	consume	cps/bittorrent/ratelimit.html#consume,BandwidthLimiter,int,Direction	proc consume(limiter: BandwidthLimiter; bytes: int; dir: Direction): CpsVoidFuture		2410
+nim	waitForBudget	cps/bittorrent/ratelimit.html#waitForBudget,BandwidthLimiter,Direction	proc waitForBudget(limiter: BandwidthLimiter; dir: Direction): CpsVoidFuture		2420
+nim	consume	cps/bittorrent/ratelimit.html#consume,BandwidthLimiter,int,Direction	proc consume(limiter: BandwidthLimiter; bytes: int; dir: Direction): CpsVoidFuture		2420
 nim	updateLimits	cps/bittorrent/ratelimit.html#updateLimits,BandwidthLimiter,int,int,int	proc updateLimits(limiter: BandwidthLimiter; uploadBps: int = 0;\n             downloadBps: int = 0; percent: int = 0)		164

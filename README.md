@@ -37,21 +37,26 @@ orchestrator used by the native torrent application.
 - Nim 2.0 or newer
 - [cps-runtime](https://github.com/gabearro/cps-runtime)
 - [cps-tls](https://github.com/gabearro/cps-tls)
-- Thread-safe reference counting because the client uses the CPS MT runtime
+- A CPS runtime built with ARC, ORC, or AtomicARC
 
 ## Install
 
 ```sh
-nimble install https://github.com/gabearro/cps-bittorrent@#v1.0.0
+nimble install https://github.com/gabearro/cps-bittorrent@#v1.0.1
 ```
 
-The consuming project must enable the MT runtime in its `nim.cfg`:
+The consuming project must enable threads. ORC is the default and is a good
+fit when the application can form cycles:
 
 ```cfg
 --threads:on
---mm:atomicArc
+--mm:orc
 --deepcopy:on
 ```
+
+Use `--mm:arc` for acyclic ownership graphs, or `--mm:atomicArc` when the
+application itself deliberately shares managed references across raw OS
+threads instead of using the runtime's ownership-preserving APIs.
 
 ## Inspect a torrent
 
@@ -140,7 +145,11 @@ nimble install -d -y
 nimble checkDocs
 nimble docs
 nimble test
+nimble testMms
 ```
+
+The library supports ARC, ORC, and AtomicARC. `nimble testMms` runs the
+same supported surface under all three memory managers.
 
 `nimble docs` writes the generated API reference to
 [`docs/api/theindex.html`](docs/api/theindex.html).

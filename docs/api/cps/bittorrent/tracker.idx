@@ -18,13 +18,13 @@ nim	parseCompactPeers6	cps/bittorrent/tracker.html#parseCompactPeers6,string	pro
 nim	parseDictPeers	cps/bittorrent/tracker.html#parseDictPeers,BencodeValue	proc parseDictPeers(list: BencodeValue): seq[TrackerPeer]		207
 nim	parseTrackerResponse	cps/bittorrent/tracker.html#parseTrackerResponse,string	proc parseTrackerResponse(data: string): TrackerResponse		227
 nim	parseScrapeResponse	cps/bittorrent/tracker.html#parseScrapeResponse,string,array[,byte]	proc parseScrapeResponse(data: string; infoHash: array[20, byte]): ScrapeInfo		274
-nim	httpAnnounce	cps/bittorrent/tracker.html#httpAnnounce,string,AnnounceParams	proc httpAnnounce(announceUrl: string; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2410
-nim	httpsAnnounce	cps/bittorrent/tracker.html#httpsAnnounce,string,AnnounceParams	proc httpsAnnounce(announceUrl: string; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2410
-nim	udpAnnounce	cps/bittorrent/tracker.html#udpAnnounce,string,AnnounceParams	proc udpAnnounce(announceUrl: string; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2410
-nim	httpScrape	cps/bittorrent/tracker.html#httpScrape,string,array[,byte]	proc httpScrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[ScrapeInfo]		2410
-nim	httpsScrape	cps/bittorrent/tracker.html#httpsScrape,string,array[,byte]	proc httpsScrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[\n    ScrapeInfo]		2410
-nim	udpScrape	cps/bittorrent/tracker.html#udpScrape,string,array[,byte]	proc udpScrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[ScrapeInfo]		2410
-nim	scrape	cps/bittorrent/tracker.html#scrape,string,array[,byte]	proc scrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[ScrapeInfo]		2410
-nim	announce	cps/bittorrent/tracker.html#announce,string,AnnounceParams	proc announce(announceUrl: string; params: AnnounceParams): CpsFuture[TrackerResponse]		2410
-nim	announceToAll	cps/bittorrent/tracker.html#announceToAll,seq[string],AnnounceParams	proc announceToAll(urls: seq[string]; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2410
-nim	announceToAllMerge	cps/bittorrent/tracker.html#announceToAllMerge,seq[string],AnnounceParams	proc announceToAllMerge(urls: seq[string]; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2410
+nim	httpAnnounce	cps/bittorrent/tracker.html#httpAnnounce,string,AnnounceParams	proc httpAnnounce(announceUrl: string; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2420
+nim	httpsAnnounce	cps/bittorrent/tracker.html#httpsAnnounce,string,AnnounceParams	proc httpsAnnounce(announceUrl: string; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2420
+nim	udpAnnounce	cps/bittorrent/tracker.html#udpAnnounce,string,AnnounceParams	proc udpAnnounce(announceUrl: string; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2420
+nim	httpScrape	cps/bittorrent/tracker.html#httpScrape,string,array[,byte]	proc httpScrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[ScrapeInfo]		2420
+nim	httpsScrape	cps/bittorrent/tracker.html#httpsScrape,string,array[,byte]	proc httpsScrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[\n    ScrapeInfo]		2420
+nim	udpScrape	cps/bittorrent/tracker.html#udpScrape,string,array[,byte]	proc udpScrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[ScrapeInfo]		2420
+nim	scrape	cps/bittorrent/tracker.html#scrape,string,array[,byte]	proc scrape(announceUrl: string; infoHash: array[20, byte]): CpsFuture[ScrapeInfo]		2420
+nim	announce	cps/bittorrent/tracker.html#announce,string,AnnounceParams	proc announce(announceUrl: string; params: AnnounceParams): CpsFuture[TrackerResponse]		2420
+nim	announceToAll	cps/bittorrent/tracker.html#announceToAll,seq[string],AnnounceParams	proc announceToAll(urls: seq[string]; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2420
+nim	announceToAllMerge	cps/bittorrent/tracker.html#announceToAllMerge,seq[string],AnnounceParams	proc announceToAllMerge(urls: seq[string]; params: AnnounceParams): CpsFuture[\n    TrackerResponse]		2420

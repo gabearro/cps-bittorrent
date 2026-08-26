@@ -12,5 +12,5 @@ nim	newUtpManager	cps/bittorrent/utp_stream.html#newUtpManager,int,Domain	proc n
 nim	start	cps/bittorrent/utp_stream.html#start,UtpManager	proc start(mgr: UtpManager)		406
 nim	close	cps/bittorrent/utp_stream.html#close,UtpManager	proc close(mgr: UtpManager)		458
 nim	connectionCount	cps/bittorrent/utp_stream.html#connectionCount,UtpManager	proc connectionCount(mgr: UtpManager): int		479
-nim	utpConnect	cps/bittorrent/utp_stream.html#utpConnect,UtpManager,string,int,int	proc utpConnect(mgr: UtpManager; ip: string; port: int;\n           timeoutMs: int = UtpConnectTimeoutMs): CpsFuture[UtpStream]		2410
-nim	utpAccept	cps/bittorrent/utp_stream.html#utpAccept,UtpManager	proc utpAccept(mgr: UtpManager): CpsFuture[UtpStream]		2410
+nim	utpConnect	cps/bittorrent/utp_stream.html#utpConnect,UtpManager,string,int,int	proc utpConnect(mgr: UtpManager; ip: string; port: int;\n           timeoutMs: int = UtpConnectTimeoutMs): CpsFuture[UtpStream]		2420
+nim	utpAccept	cps/bittorrent/utp_stream.html#utpAccept,UtpManager	proc utpAccept(mgr: UtpManager): CpsFuture[UtpStream]		2420

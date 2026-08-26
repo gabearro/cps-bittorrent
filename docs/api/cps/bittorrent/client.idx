@@ -1,47 +1,47 @@
 nimTitle	client	cps/bittorrent/client.html	module cps/bittorrent/client		0
-nim	MaxPeers	cps/bittorrent/client.html#MaxPeers	const MaxPeers		75
-nim	MinPeers	cps/bittorrent/client.html#MinPeers	const MinPeers		76
-nim	MaxHalfOpen	cps/bittorrent/client.html#MaxHalfOpen	const MaxHalfOpen		77
-nim	MaxPerIp	cps/bittorrent/client.html#MaxPerIp	const MaxPerIp		78
-nim	ReannounceIntervalMs	cps/bittorrent/client.html#ReannounceIntervalMs	const ReannounceIntervalMs		79
-nim	UnchokeIntervalMs	cps/bittorrent/client.html#UnchokeIntervalMs	const UnchokeIntervalMs		80
-nim	MaxUnchokedPeers	cps/bittorrent/client.html#MaxUnchokedPeers	const MaxUnchokedPeers		81
-nim	StaleRequestTimeoutSec	cps/bittorrent/client.html#StaleRequestTimeoutSec	const StaleRequestTimeoutSec		82
-nim	UtpReconnectCooldownSec	cps/bittorrent/client.html#UtpReconnectCooldownSec	const UtpReconnectCooldownSec		83
-nim	MaxPendingPeers	cps/bittorrent/client.html#MaxPendingPeers	const MaxPendingPeers		84
-nim	PeerBackoffSec	cps/bittorrent/client.html#PeerBackoffSec	const PeerBackoffSec		85
-nim	csIdle	cps/bittorrent/client.html#csIdle	ClientState.csIdle		88
-nim	csStarting	cps/bittorrent/client.html#csStarting	ClientState.csStarting		88
-nim	csDownloading	cps/bittorrent/client.html#csDownloading	ClientState.csDownloading		88
-nim	csSeeding	cps/bittorrent/client.html#csSeeding	ClientState.csSeeding		88
-nim	csStopping	cps/bittorrent/client.html#csStopping	ClientState.csStopping		88
-nim	csStopped	cps/bittorrent/client.html#csStopped	ClientState.csStopped		88
-nim	ClientState	cps/bittorrent/client.html#ClientState	enum ClientState		88
-nim	UtpReconnectSnapshot	cps/bittorrent/client.html#UtpReconnectSnapshot	object UtpReconnectSnapshot		96
-nim	ClientConfig	cps/bittorrent/client.html#ClientConfig	object ClientConfig		114
-nim	TrackerRuntime	cps/bittorrent/client.html#TrackerRuntime	object TrackerRuntime		142
-nim	TorrentClient	cps/bittorrent/client.html#TorrentClient	type TorrentClient		154
-nim	cekStarted	cps/bittorrent/client.html#cekStarted	ClientEventKind.cekStarted		245
-nim	cekPieceVerified	cps/bittorrent/client.html#cekPieceVerified	ClientEventKind.cekPieceVerified		245
-nim	cekProgress	cps/bittorrent/client.html#cekProgress	ClientEventKind.cekProgress		245
-nim	cekPeerConnected	cps/bittorrent/client.html#cekPeerConnected	ClientEventKind.cekPeerConnected		245
-nim	cekPeerDisconnected	cps/bittorrent/client.html#cekPeerDisconnected	ClientEventKind.cekPeerDisconnected		245
-nim	cekCompleted	cps/bittorrent/client.html#cekCompleted	ClientEventKind.cekCompleted		245
-nim	cekError	cps/bittorrent/client.html#cekError	ClientEventKind.cekError		245
-nim	cekInfo	cps/bittorrent/client.html#cekInfo	ClientEventKind.cekInfo		245
-nim	cekStopped	cps/bittorrent/client.html#cekStopped	ClientEventKind.cekStopped		245
-nim	cekTrackerResponse	cps/bittorrent/client.html#cekTrackerResponse	ClientEventKind.cekTrackerResponse		245
-nim	cekPieceStateChanged	cps/bittorrent/client.html#cekPieceStateChanged	ClientEventKind.cekPieceStateChanged		245
-nim	ClientEventKind	cps/bittorrent/client.html#ClientEventKind	enum ClientEventKind		245
-nim	ClientEvent	cps/bittorrent/client.html#ClientEvent	object ClientEvent		258
-nim	defaultConfig	cps/bittorrent/client.html#defaultConfig	proc defaultConfig(): ClientConfig		283
-nim	newTorrentClient	cps/bittorrent/client.html#newTorrentClient,TorrentMetainfo,ClientConfig	proc newTorrentClient(metainfo: TorrentMetainfo;\n                 config: ClientConfig = defaultConfig()): TorrentClient		312
-nim	newMagnetClient	cps/bittorrent/client.html#newMagnetClient,array[,byte],seq[string],string,ClientConfig,seq[int]	proc newMagnetClient(infoHash: array[20, byte]; trackers: seq[string];\n                displayName: string = "";\n                config: ClientConfig = defaultConfig();\n                selectedFiles: seq[int] = @[]): TorrentClient		366
-nim	activePeers	cps/bittorrent/client.html#activePeers.i,TorrentClient	iterator activePeers(client: TorrentClient): PeerConn		896
-nim	dhtNodeCount	cps/bittorrent/client.html#dhtNodeCount,TorrentClient	proc dhtNodeCount(client: TorrentClient): int		909
-nim	setFilePriority	cps/bittorrent/client.html#setFilePriority,TorrentClient,int,string	proc setFilePriority(client: TorrentClient; fileIndex: int; priority: string): CpsVoidFuture		2410
-nim	recheckAllPieces	cps/bittorrent/client.html#recheckAllPieces,TorrentClient	proc recheckAllPieces(client: TorrentClient): CpsVoidFuture		2410
-nim	dhtPendingKey	cps/bittorrent/client.html#dhtPendingKey,string,string,int	proc dhtPendingKey(transId, ip: string; port: int): string		2949
-nim	handleIncomingPeer	cps/bittorrent/client.html#handleIncomingPeer,TorrentClient,AsyncStream,string,uint16,TransportKind	proc handleIncomingPeer(client: TorrentClient; stream: AsyncStream;\n                   ip: string = "incoming"; port: uint16 = 0;\n                   transport: TransportKind = ptTcp)		4025
-nim	start	cps/bittorrent/client.html#start,TorrentClient	proc start(client: TorrentClient): CpsVoidFuture		2410
-nim	stop	cps/bittorrent/client.html#stop,TorrentClient	proc stop(client: TorrentClient)		4823
+nim	MaxPeers	cps/bittorrent/client.html#MaxPeers	const MaxPeers		69
+nim	MinPeers	cps/bittorrent/client.html#MinPeers	const MinPeers		70
+nim	MaxHalfOpen	cps/bittorrent/client.html#MaxHalfOpen	const MaxHalfOpen		71
+nim	MaxPerIp	cps/bittorrent/client.html#MaxPerIp	const MaxPerIp		72
+nim	ReannounceIntervalMs	cps/bittorrent/client.html#ReannounceIntervalMs	const ReannounceIntervalMs		73
+nim	UnchokeIntervalMs	cps/bittorrent/client.html#UnchokeIntervalMs	const UnchokeIntervalMs		74
+nim	MaxUnchokedPeers	cps/bittorrent/client.html#MaxUnchokedPeers	const MaxUnchokedPeers		75
+nim	StaleRequestTimeoutSec	cps/bittorrent/client.html#StaleRequestTimeoutSec	const StaleRequestTimeoutSec		76
+nim	UtpReconnectCooldownSec	cps/bittorrent/client.html#UtpReconnectCooldownSec	const UtpReconnectCooldownSec		77
+nim	MaxPendingPeers	cps/bittorrent/client.html#MaxPendingPeers	const MaxPendingPeers		78
+nim	PeerBackoffSec	cps/bittorrent/client.html#PeerBackoffSec	const PeerBackoffSec		79
+nim	csIdle	cps/bittorrent/client.html#csIdle	ClientState.csIdle		82
+nim	csStarting	cps/bittorrent/client.html#csStarting	ClientState.csStarting		82
+nim	csDownloading	cps/bittorrent/client.html#csDownloading	ClientState.csDownloading		82
+nim	csSeeding	cps/bittorrent/client.html#csSeeding	ClientState.csSeeding		82
+nim	csStopping	cps/bittorrent/client.html#csStopping	ClientState.csStopping		82
+nim	csStopped	cps/bittorrent/client.html#csStopped	ClientState.csStopped		82
+nim	ClientState	cps/bittorrent/client.html#ClientState	enum ClientState		82
+nim	UtpReconnectSnapshot	cps/bittorrent/client.html#UtpReconnectSnapshot	object UtpReconnectSnapshot		90
+nim	ClientConfig	cps/bittorrent/client.html#ClientConfig	object ClientConfig		108
+nim	TrackerRuntime	cps/bittorrent/client.html#TrackerRuntime	object TrackerRuntime		136
+nim	TorrentClient	cps/bittorrent/client.html#TorrentClient	type TorrentClient		148
+nim	cekStarted	cps/bittorrent/client.html#cekStarted	ClientEventKind.cekStarted		239
+nim	cekPieceVerified	cps/bittorrent/client.html#cekPieceVerified	ClientEventKind.cekPieceVerified		239
+nim	cekProgress	cps/bittorrent/client.html#cekProgress	ClientEventKind.cekProgress		239
+nim	cekPeerConnected	cps/bittorrent/client.html#cekPeerConnected	ClientEventKind.cekPeerConnected		239
+nim	cekPeerDisconnected	cps/bittorrent/client.html#cekPeerDisconnected	ClientEventKind.cekPeerDisconnected		239
+nim	cekCompleted	cps/bittorrent/client.html#cekCompleted	ClientEventKind.cekCompleted		239
+nim	cekError	cps/bittorrent/client.html#cekError	ClientEventKind.cekError		239
+nim	cekInfo	cps/bittorrent/client.html#cekInfo	ClientEventKind.cekInfo		239
+nim	cekStopped	cps/bittorrent/client.html#cekStopped	ClientEventKind.cekStopped		239
+nim	cekTrackerResponse	cps/bittorrent/client.html#cekTrackerResponse	ClientEventKind.cekTrackerResponse		239
+nim	cekPieceStateChanged	cps/bittorrent/client.html#cekPieceStateChanged	ClientEventKind.cekPieceStateChanged		239
+nim	ClientEventKind	cps/bittorrent/client.html#ClientEventKind	enum ClientEventKind		239
+nim	ClientEvent	cps/bittorrent/client.html#ClientEvent	object ClientEvent		252
+nim	defaultConfig	cps/bittorrent/client.html#defaultConfig	proc defaultConfig(): ClientConfig		277
+nim	newTorrentClient	cps/bittorrent/client.html#newTorrentClient,TorrentMetainfo,ClientConfig	proc newTorrentClient(metainfo: TorrentMetainfo;\n                 config: ClientConfig = defaultConfig()): TorrentClient		306
+nim	newMagnetClient	cps/bittorrent/client.html#newMagnetClient,array[,byte],seq[string],string,ClientConfig,seq[int]	proc newMagnetClient(infoHash: array[20, byte]; trackers: seq[string];\n                displayName: string = "";\n                config: ClientConfig = defaultConfig();\n                selectedFiles: seq[int] = @[]): TorrentClient		360
+nim	activePeers	cps/bittorrent/client.html#activePeers.i,TorrentClient	iterator activePeers(client: TorrentClient): PeerConn		885
+nim	dhtNodeCount	cps/bittorrent/client.html#dhtNodeCount,TorrentClient	proc dhtNodeCount(client: TorrentClient): int		898
+nim	setFilePriority	cps/bittorrent/client.html#setFilePriority,TorrentClient,int,string	proc setFilePriority(client: TorrentClient; fileIndex: int; priority: string): CpsVoidFuture		2420
+nim	recheckAllPieces	cps/bittorrent/client.html#recheckAllPieces,TorrentClient	proc recheckAllPieces(client: TorrentClient): CpsVoidFuture		2420
+nim	dhtPendingKey	cps/bittorrent/client.html#dhtPendingKey,string,string,int	proc dhtPendingKey(transId, ip: string; port: int): string		2938
+nim	handleIncomingPeer	cps/bittorrent/client.html#handleIncomingPeer,TorrentClient,AsyncStream,string,uint16,TransportKind	proc handleIncomingPeer(client: TorrentClient; stream: AsyncStream;\n                   ip: string = "incoming"; port: uint16 = 0;\n                   transport: TransportKind = ptTcp)		4014
+nim	start	cps/bittorrent/client.html#start,TorrentClient	proc start(client: TorrentClient): CpsVoidFuture		2420
+nim	stop	cps/bittorrent/client.html#stop,TorrentClient	proc stop(client: TorrentClient)		4815

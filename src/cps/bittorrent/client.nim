@@ -59,15 +59,9 @@ template btDebug(args: varargs[string, `$`]) =
 # Lock-free Treiber stack nodes for reactor → CPS message handoff.
 # Reactor callback pushes parsed messages; CPS drain loop pops and processes.
 type
-  DhtRecvNode = object
-    next: ptr DhtRecvNode
-    msg: DhtMessage
-    srcAddr: Sockaddr_storage
-    addrLen: SockLen
-
-  LsdRecvNode = object
-    next: ptr LsdRecvNode
-    data: string
+  DatagramRecvNode = object
+    next: ptr DatagramRecvNode
+    dataLen: int
     srcAddr: Sockaddr_storage
     addrLen: SockLen
 
@@ -419,30 +413,40 @@ proc resetStopSignal(client: TorrentClient) =
 
 # ---------------------------------------------------------------------------
 # Lock-free Treiber stack push/drain for reactor → CPS handoff.
-# Reactor callbacks push parsed messages without any lock or syscall.
+# Reactor callbacks push raw datagrams without any lock or syscall.
 # CPS drain loops pop via atomic exchange (wait-free).
 # ---------------------------------------------------------------------------
 
-proc pushDhtRecv(client: TorrentClient, msg: DhtMessage, srcAddr: Sockaddr_storage, addrLen: SockLen) =
-  ## Lock-free push of a parsed DHT message to the Treiber stack.
-  ## Called from reactor callback — no lock, no syscall.
-  let node = cast[ptr DhtRecvNode](allocShared0(sizeof(DhtRecvNode)))
-  {.cast(gcsafe).}:
-    copyMem(addr node.msg, unsafeAddr msg, sizeof(DhtMessage))
-    zeroMem(unsafeAddr msg, sizeof(DhtMessage))
-  node.srcAddr = srcAddr
-  node.addrLen = addrLen
+proc nodeData(node: ptr DatagramRecvNode): pointer {.inline.} =
+  cast[pointer](cast[uint](node) + uint(sizeof(DatagramRecvNode)))
+
+proc newDatagramNode(data: string, srcAddr: Sockaddr_storage,
+                     addrLen: SockLen): ptr DatagramRecvNode =
+  ## Copy a datagram into one shared POD allocation. No Nim-managed value
+  ## crosses the reactor/worker boundary under ARC, ORC, or AtomicARC.
+  result = cast[ptr DatagramRecvNode](
+    allocShared0(sizeof(DatagramRecvNode) + data.len))
+  result.dataLen = data.len
+  result.srcAddr = srcAddr
+  result.addrLen = addrLen
+  if data.len > 0:
+    copyMem(result.nodeData(), unsafeAddr data[0], data.len)
+
+proc pushDhtRecv(client: TorrentClient, data: string,
+                 srcAddr: Sockaddr_storage, addrLen: SockLen) =
+  ## Lock-free push of a raw DHT datagram to the Treiber stack.
+  ## Called from reactor callback — no lock, no syscall, no managed transfer.
+  let node = newDatagramNode(data, srcAddr, addrLen)
   var oldHead = client.dhtRecvHead.load(moRelaxed)
   while true:
-    node.next = cast[ptr DhtRecvNode](oldHead)
+    node.next = cast[ptr DatagramRecvNode](oldHead)
     if client.dhtRecvHead.compareExchangeWeak(oldHead, cast[pointer](node),
                                                moRelease, moRelaxed):
       break
 
-proc drainDhtRecv(client: TorrentClient): seq[tuple[msg: DhtMessage, srcAddr: Sockaddr_storage, addrLen: SockLen]] =
-  ## Lock-free drain of all buffered DHT messages (wait-free atomic exchange).
-  ## Returns items in FIFO order (reverses Treiber stack LIFO).
-  let head = cast[ptr DhtRecvNode](client.dhtRecvHead.exchange(nil, moAcquireRelease))
+proc drainDatagrams(headValue: pointer):
+    seq[tuple[data: string, srcAddr: Sockaddr_storage, addrLen: SockLen]] =
+  let head = cast[ptr DatagramRecvNode](headValue)
   if head == nil:
     return @[]
   var n = 0
@@ -450,55 +454,40 @@ proc drainDhtRecv(client: TorrentClient): seq[tuple[msg: DhtMessage, srcAddr: So
   while node != nil:
     inc n
     node = node.next
-  result = newSeq[tuple[msg: DhtMessage, srcAddr: Sockaddr_storage, addrLen: SockLen]](n)
+  result = newSeq[tuple[data: string, srcAddr: Sockaddr_storage,
+                        addrLen: SockLen]](n)
   node = head
   var i = n - 1
   while node != nil:
     let next = node.next
-    copyMem(addr result[i].msg, addr node.msg, sizeof(DhtMessage))
-    zeroMem(addr node.msg, sizeof(DhtMessage))
+    result[i].data = newString(node.dataLen)
+    if node.dataLen > 0:
+      copyMem(addr result[i].data[0], node.nodeData(), node.dataLen)
     result[i].srcAddr = node.srcAddr
     result[i].addrLen = node.addrLen
     deallocShared(node)
     node = next
     dec i
 
+proc drainDhtRecv(client: TorrentClient):
+    seq[tuple[data: string, srcAddr: Sockaddr_storage, addrLen: SockLen]] =
+  ## Lock-free drain of all buffered DHT messages (wait-free atomic exchange).
+  ## Returns items in FIFO order (reverses Treiber stack LIFO).
+  drainDatagrams(client.dhtRecvHead.exchange(nil, moAcquireRelease))
+
 proc pushLsdRecv(client: TorrentClient, data: sink string, srcAddr: Sockaddr_storage, addrLen: SockLen) =
   ## Lock-free push of an LSD packet to the Treiber stack.
-  let node = cast[ptr LsdRecvNode](allocShared0(sizeof(LsdRecvNode)))
-  copyMem(addr node.data, unsafeAddr data, sizeof(string))
-  zeroMem(unsafeAddr data, sizeof(string))
-  node.srcAddr = srcAddr
-  node.addrLen = addrLen
+  let node = newDatagramNode(data, srcAddr, addrLen)
   var oldHead = client.lsdRecvHead.load(moRelaxed)
   while true:
-    node.next = cast[ptr LsdRecvNode](oldHead)
+    node.next = cast[ptr DatagramRecvNode](oldHead)
     if client.lsdRecvHead.compareExchangeWeak(oldHead, cast[pointer](node),
                                                moRelease, moRelaxed):
       break
 
 proc drainLsdRecv(client: TorrentClient): seq[tuple[data: string, srcAddr: Sockaddr_storage, addrLen: SockLen]] =
   ## Lock-free drain of all buffered LSD packets.
-  let head = cast[ptr LsdRecvNode](client.lsdRecvHead.exchange(nil, moAcquireRelease))
-  if head == nil:
-    return @[]
-  var n = 0
-  var node = head
-  while node != nil:
-    inc n
-    node = node.next
-  result = newSeq[tuple[data: string, srcAddr: Sockaddr_storage, addrLen: SockLen]](n)
-  node = head
-  var i = n - 1
-  while node != nil:
-    let next = node.next
-    copyMem(addr result[i].data, addr node.data, sizeof(string))
-    zeroMem(addr node.data, sizeof(string))
-    result[i].srcAddr = node.srcAddr
-    result[i].addrLen = node.addrLen
-    deallocShared(node)
-    node = next
-    dec i
+  drainDatagrams(client.lsdRecvHead.exchange(nil, moAcquireRelease))
 
 proc signalStop(client: TorrentClient) {.inline.} =
   if client.stopSignal != nil and not client.stopSignal.finished:
@@ -3235,12 +3224,8 @@ proc setupDhtSocket(client: TorrentClient): bool =
   # All routing table access, response sending, and query matching happen
   # in the CPS dhtRecvDrainLoop — zero locks on the reactor thread.
   client.dhtSock.onRecv(1500, proc(data: string, srcAddr: Sockaddr_storage, addrLen: SockLen) =
-    try:
-      let msg = decodeDhtMessage(data)
-      {.cast(gcsafe).}:
-        client.pushDhtRecv(msg, srcAddr, addrLen)
-    except CatchableError:
-      discard
+    {.cast(gcsafe).}:
+      client.pushDhtRecv(data, srcAddr, addrLen)
   )
   return true
 
@@ -3699,7 +3684,11 @@ proc dhtProcessRecvBatch(client: TorrentClient) =
   ## (complete pending futures). Called from dhtRecvDrainLoop under no lock.
   let batch = client.drainDhtRecv()
   for item in batch:
-    let msg = item.msg
+    var msg: DhtMessage
+    try:
+      msg = decodeDhtMessage(item.data)
+    except CatchableError:
+      continue
     if msg.isQuery:
       let (senderIp, senderPort) = extractIpPort(item.srcAddr, item.addrLen)
       # Update correct routing table (BEP 32: separate IPv4/IPv6 tables)
@@ -4812,6 +4801,9 @@ proc start*(client: TorrentClient): CpsVoidFuture {.cps.} =
     client.lsdSock.close()
   # Cancel any remaining pending DHT queries to avoid dangling futures
   client.dhtCleanup()
+  # Release raw shared datagram nodes after receive callbacks have stopped.
+  discard client.drainDhtRecv()
+  discard client.drainLsdRecv()
   # Clear reconnect state tables to prevent orphaned entries
   client.utpReconnectCooldown.clear()
   client.utpReconnectState.clear()
@@ -4826,4 +4818,3 @@ proc stop*(client: TorrentClient) =
   client.state = csStopping
   # Close peer event channel to unblock event loop
   client.peerEvents.close()
-
