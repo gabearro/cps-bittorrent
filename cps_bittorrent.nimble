@@ -1,5 +1,5 @@
 version = "1.0.1"
-author = "Gabriel Arroyo"
+author = "Gabriel Arrouye"
 description = "BitTorrent client with DHT, uTP, trackers and disk storage for the CPS Nim runtime."
 license = "MIT"
 srcDir = "src"
